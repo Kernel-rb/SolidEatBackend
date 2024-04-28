@@ -1,29 +1,5 @@
-// models/Restaurateur.js
-
+// Restaurateur.js
 const mongoose = require('mongoose');
-
-const ingredientSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: false
-    }
-});
-
-const menuItemSchema = new mongoose.Schema({
-    image: {
-        type: String,
-        required: true
-    },
-    title: {
-        type: String,
-        required: true
-    },
-    price: {
-        type: Number,
-        required: true
-    },
-    ingredients: [ingredientSchema]
-});
 
 const restaurateurSchema = new mongoose.Schema({
     restaurantName: {
@@ -56,8 +32,7 @@ const restaurateurSchema = new mongoose.Schema({
     userType: {
         type: String,
         default: "Restaurateur"
-    },
-    menu: [menuItemSchema]
+    }
 });
 
 const Restaurateur = mongoose.model('Restaurateur', restaurateurSchema);

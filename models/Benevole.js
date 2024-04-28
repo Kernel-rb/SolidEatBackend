@@ -1,15 +1,5 @@
+// Benevole.js
 const mongoose = require('mongoose');
-
-const mealOfferSchema = new mongoose.Schema({
-    mealDate: {
-        type: Date,
-        required: true
-    },
-    offeredTo: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'SituationDifficile'
-    }
-});
 
 const benevoleSchema = new mongoose.Schema({
     fullName: {
@@ -34,12 +24,7 @@ const benevoleSchema = new mongoose.Schema({
     userType: {
         type: String,
         default: "Bénévole"
-    },
-    offerMeal: {
-        type: Boolean,
-        default: false
-    },
-    offerHistory: [mealOfferSchema]
+    }
 });
 
 const Benevole = mongoose.model('Benevole', benevoleSchema);

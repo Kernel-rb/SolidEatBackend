@@ -1,18 +1,5 @@
-// models/SituationDifficile.js
-
+// SituationDifficile.js
 const mongoose = require('mongoose');
-
-const reservationSchema = new mongoose.Schema({
-    restaurant: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Restaurateur',
-        required: true
-    },
-    mealDate: {
-        type: Date,
-        required: true
-    }
-});
 
 const situationDifficileSchema = new mongoose.Schema({
     fullName: {
@@ -41,8 +28,7 @@ const situationDifficileSchema = new mongoose.Schema({
     role: {
         type: String,
         default: 'En situation difficile'
-    },
-    reservations: [reservationSchema] // Array to store reservation information
+    }
 });
 
 const SituationDifficile = mongoose.model('SituationDifficile', situationDifficileSchema);
