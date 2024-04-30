@@ -1,110 +1,121 @@
-// UserController.js
-const SituationDifficile = require('../models/SituationDifficile');
-const Restaurateur = require('../models/Restaurateur');
-const Benevole = require('../models/Benevole');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
-const { validationResult } = require('express-validator');
+const express = require('express');
+const bcrypt = require('bcryptjs');
+const crypto = require('crypto');
+const User = require('../models/User');
+const Restaurant = require('../models/Restaurant');
 
-exports.register = async (req, res) => {
+
+
+
+// === Register User ===
+// Path: /api/users/register
+
+const registerUser = async (req, res, next) => {
     try {
-        const { userType } = req.body;
-        switch (userType) {
-            case 'En situation difficile':
-                return registerSituationDifficile(req, res);
-            case 'Restaurateur':
-                return registerRestaurateur(req, res);
-            case 'Bénévole':
-                return registerBenevole(req, res);
-            default:
-                return res.status(400).json({ message: 'Invalid user type' });
+        const { name, email, confirmEmail, password, confirmPassword, phoneNumber, status } = req.body;
+        if (!name || !email || !password || !confirmPassword || !phoneNumber) {
+            return res.status(400).json({ message: 'All fields are required' });
         }
-    } catch (error) {
-        console.error('Error registering user:', error);
-        res.status(500).json({ message: 'An error occurred while registering user' });
-    }
-};
+        if (email !== confirmEmail) {
+            return res.status(400).json({ message: 'Emails do not match' });
 
-const validateUserInput = (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-    }
-};
+        }
+        const newName = name.trim().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+        const nameExist = await User.findOne({ name: newName });
+        if (!nameExist) {
+            return res.status(400).json({ message: 'Name already exists' });
+        }
+        const newEmail = email.toLowerCase();
+        const emailExist = await User.findOne({ email: newEmail });
+        if (emailExist) {
+            return res.status(400).json({ message: 'Email already exists' });
+        }
+        if (password.trim().length < 6) {
+            return res.status(400).json({ message: 'Password must be at least 6 characters long' });
+        }
+        if (password !== confirmPassword) {
+            return res.status(400).json({ message: 'Passwords do not match' });
+        }
+        if (phoneNumber.length !== 10) {
+            return res.status(400).json({ message: 'Phone number must be 10 digits long' });
+        }
+        if (typeof phoneNumber !== 'number') {
+            return res.status(400).json({ message: 'Phone number must be a number' });
+        }
 
-const registerSituationDifficile = async (req, res) => {
-    validateUserInput(req, res);
-    try {
-        const { fullName, email, password, phone, status } = req.body;
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
-        const situationDifficile = new SituationDifficile({ fullName, email, password: hashedPassword, phone, status });
-        await situationDifficile.save();
+        const newUser = new User({
+            name: newName,
+            email: newEmail,
+            phoneNumber,
+            password: hashedPassword,
+            status
+        });
+        await newUser.save();
         res.status(201).json({ message: 'User registered successfully' });
     } catch (error) {
-        console.error('Error registering user:', error);
-        res.status(500).json({ message: 'An error occurred while registering user' });
+        console.log(error);
+        res.status(500).json({ message: "Server xd" });
     }
-};
+}
 
-const registerRestaurateur = async (req, res) => {
-    validateUserInput(req, res);
-    try {
-        const { restaurantName, address, openingHours, email, password, phone } = req.body;
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(password, salt);
-        const restaurateur = new Restaurateur({ restaurantName, address, openingHours, email, password: hashedPassword, phone });
-        await restaurateur.save();
-        res.status(201).json({ message: 'Restaurateur registered successfully' });
-    } catch (error) {
-        console.error('Error registering restaurateur:', error);
-        res.status(500).json({ message: 'An error occurred while registering restaurateur' });
-    }
-};
 
-const registerBenevole = async (req, res) => {
-    validateUserInput(req, res);
-    try {
-        const { fullName, email, password, phone } = req.body;
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(password, salt);
-        const benevole = new Benevole({ fullName, email, password: hashedPassword, phone });
-        await benevole.save();
-        res.status(201).json({ message: 'Benevole registered successfully' });
-    } catch (error) {
-        console.error('Error registering benevole:', error);
-        res.status(500).json({ message: 'An error occurred while registering benevole' });
-    }
-};
 
-exports.login = async (req, res) => {
-    try {
-        const { email, password } = req.body;
-        if (!email || !password) {
-            return res.status(400).json({ message: 'Email and password are required' });
-        }
-        let user;
-        if (email) {
-            user = await SituationDifficile.findOne({ email });
-            if (!user) {
-                user = await Restaurateur.findOne({ email });
-            }
-            if (!user) {
-                user = await Benevole.findOne({ email });
-            }
-        }
-        if (!user) {
-            return res.status(404).json({ message: 'User not found' });
-        }
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) {
-            return res.status(401).json({ message: 'Incorrect password' });
-        }
-        const { _id: id, fullName, restaurantName, role } = user;
-        const token = jwt.sign({ id, fullName, restaurantName, role }, process.env.JWT_SECRET, { expiresIn: '1d' });
-        res.status(200).json({ token, user: { id, fullName, restaurantName, role } });
-    } catch (error) {
-        console.error('Error logging in user:', error);
-        res.status(500).json({ message: 'An error occurred while logging in user' });
-    }
-};
+// === Login User ===
+// Path: /api/users/login
+const loginUser = async (req, res, next) => {
+    return res.status(200).json({ message: 'Login successful' });
+
+}
+
+// === My profile ===
+// Path: /api/users/mon-compte
+const userProfile = async (req, res, next) => {
+    return res.status(200).json({ message: 'User profile' });
+
+}
+
+// === Update iformation ===
+// Path: /api/users/update
+const updateProfile = async (req, res, next) => {
+    return res.status(200).json({ message: 'User profile updated' });
+
+}
+
+// === Get mes repas ===
+// Path: /api/users/repas
+const getMeals = async (req, res, next) => {
+    return res.status(200).json({ message: 'All meals' });
+}
+
+
+// === Get Offrir ===
+// Path: /api/users/offrir
+const getOffrir = async (req, res, next) => {
+    return res.status(200).json({ message: 'All offrir' });
+}
+
+// == Reserver un repas ===
+// Path: /api/users/reserver ; Method: POST
+const reserverMeal = async (req, res, next) => {
+    return res.status(200).json({ message: 'Meal reserved' });
+}
+
+// == Restaurent à proximité ===
+// Path: /api/users/restaurent ; Method: GET
+const getRestaurent = async (req, res, next) => {
+    return res.status(200).json({ message: 'Restaurent à proximité' });
+}
+
+
+module.exports = {
+    registerUser,
+    loginUser,
+    userProfile,
+    updateProfile,
+    getMeals,
+    getOffrir,
+    reserverMeal,
+    getRestaurent
+}
