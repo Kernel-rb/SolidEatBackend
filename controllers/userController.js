@@ -86,7 +86,20 @@ const loginUser = async (req, res, next) => {
 
 // === My profile ===
 const userProfile = async (req, res, next) => {
-    return res.status(200).json({ message: 'User profile' });
+    try {
+        const user = await User.findOne({ _id: req.user.id });
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        res.status(200).json({
+            name: user.name,
+            email: user.email,
+            phoneNumber: user.phoneNumber,
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Failed to get user" });
+    }
 }
 
 // === Update information ===
@@ -96,16 +109,16 @@ const updateProfile = async (req, res, next) => {
         if (!name || !email || !phoneNumber) {
             return res.status(400).json({ message: 'All fields are required' });
         }
-        const user = await User.findOne(req.user.id);
+        const user = await User.findOne({ _id: req.user.id });
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
         const emailExist = await User.findOne({ email });
-        if(emailExist && emailExist.id !== req.user.id) {
+        if (emailExist && emailExist.id !== req.user.id) {
             return res.status(400).json({ message: 'Email already exists' });
         }
         const phoneNumberExist = await User.findOne({ phoneNumber });
-        if(phoneNumberExist && phoneNumberExist.id !== req.user.id) {
+        if (phoneNumberExist && phoneNumberExist.id !== req.user.id) {
             return res.status(400).json({ message: 'Phone number already exists' });
         }
 
@@ -117,33 +130,10 @@ const updateProfile = async (req, res, next) => {
     }
 }
 
-// === Get meals ===
-const getMeals = async (req, res, next) => {
-    return res.status(200).json({ message: 'All meals' });
-}
-
-// === Get Offrir ===
-const getOffrir = async (req, res, next) => {
-    return res.status(200).json({ message: 'All offrir' });
-}
-
-// == Reserver un repas ===
-const reserverMeal = async (req, res, next) => {
-    return res.status(200).json({ message: 'Meal reserved' });
-}
-
-// == Restaurant à proximité ===
-const getRestaurent = async (req, res, next) => {
-    return res.status(200).json({ message: 'Restaurant à proximité' });
-}
 
 module.exports = {
     registerUser,
     loginUser,
     userProfile,
     updateProfile,
-    getMeals,
-    getOffrir,
-    reserverMeal,
-    getRestaurent
 }

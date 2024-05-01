@@ -16,3 +16,4 @@ const authMiddleware = (req, res, next) => {
         return next(new HttpError('Unauthorized', 401));
     }
 }
+module.exports = authMiddleware;
