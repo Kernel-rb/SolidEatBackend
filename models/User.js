@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true
-    }, 
+    },
     password: {
         type: String,
         required: true
@@ -23,13 +23,19 @@ const userSchema = new mongoose.Schema({
     userType: {
         type: String,
         enum: ['beneficiary', 'volunteer']
-    }, 
+    },
     status: {
         type: String
-    }, 
+    },
 });
 
+userSchema.methods.comparePassword = async function (candidatePassword) {
+    return await bcryptjs.compare(candidatePassword, this.password);
+};
 userSchema.pre('save', async function (next) {
+    if (!this.isModified('password')) {
+        return next();
+    }
     const salt = await bcryptjs.genSalt(10);
     this.password = await bcryptjs.hash(this.password, salt);
     next();
