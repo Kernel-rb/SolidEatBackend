@@ -16,11 +16,3 @@ const connectDB = async () => {
 };
 
 module.exports = connectDB;
-
-// Additional logging to track the flow of the script
-console.log('Starting MongoDB connection...');
-connectDB().then(() => {
-    console.log('MongoDB connection successful');
-}).catch(error => {
-    console.error('MongoDB connection failed:', error);
-});
