@@ -2,11 +2,17 @@ const Restaurant = require('../models/Restaurant');
 const Menu = require('../models/Menu');
 
 const jwt = require('jsonwebtoken');
+const fs = require('fs');
+const path = require('path');
+const { v4: uuidv4 } = require('uuid');
+
+
+
+
 
 
 // === Restaurant Registration ===
 // Path: /api/restaurateur/register
-
 const registerRestaurant = async (req, res, next) => {
     try {
         const { name, address, openingDays, openingHours, email, confirmEmail, password, confirmPassword, phoneNumber } = req.body;
@@ -68,8 +74,6 @@ const registerRestaurant = async (req, res, next) => {
     }
 }
 
-
-
 // === Restaurant Login ===
 // Path: /api/restaurateur/login
 const loginRestaurant = async (req, res, next) => {
@@ -97,7 +101,6 @@ const loginRestaurant = async (req, res, next) => {
 
 // === Restaurant Profile ===
 // Path: /api/restaurateur/profile
-
 const restaurantProfile = async (req, res, next) => {
     try {
         const restaurant = await Restaurant.findOne({ _id: req.user.id });
@@ -120,7 +123,6 @@ const restaurantProfile = async (req, res, next) => {
 
 // === Update Restaurant Information ===
 // Path: /api/restaurateur/update
-
 const updateRestaurant = async (req, res, next) => {
     try {
         const { name, address, openingDays, openingHours, email, phoneNumber } = req.body;
@@ -160,7 +162,8 @@ const updateRestaurant = async (req, res, next) => {
         res.status(500).json({ message: "Update failed" });
     }
 }
-// ===  My menu ===
+
+// === My Menu ===
 // Path: /api/restaurateur/menu
 const myMenu = async (req, res, next) => {
     try {
@@ -175,29 +178,62 @@ const myMenu = async (req, res, next) => {
         res.status(500).json({ message: "Failed to fetch menu" });
     }
 }
-
 // === Add Menu Item ===
 // Path: /api/restaurateur/menu/add
-
 const addMenuItem = async (req, res, next) => {
-    return res.status(200).json({ message: 'Add menu item' });
+    try {
+        let { titre, prix, categorie, ingredients, status } = req.body;
+        const image = req.files ? req.files.image : null; 
+        if (!titre || !prix || !ingredients || !image) {
+            return res.status(400).json({ message: 'All fields are required' });
+        }
+        if (!image) {
+            return res.status(400).json({ message: 'Image file is missing' });
+        }
+        if (image.size > 2000000) {
+            return res.status(400).json({ message: 'Image size too large' });
+        }
+        const allowedMimeTypes = ['image/jpeg', 'image/png'];
+        if (!allowedMimeTypes.includes(image.mimetype)) {
+            return res.status(400).json({ message: 'Invalid image format' });
+        }
+        const imageName = image.name;
+        const splitImage = imageName.split('.');
+        const newImageName = splitImage[0] + '-' + uuidv4() + '.' + splitImage[splitImage.length - 1];
+        try {
+            await image.mv(path.join(__dirname, '..', 'uploads', newImageName));
+            const newMenuItem = new Menu({
+                titre,
+                image: newImageName,
+                prix,
+                ingredients,
+                categorie,
+                status,
+                restaurant: req.user.id
+            });
+            await newMenuItem.save();
+            res.status(201).json({ message: 'Menu item added successfully' });
+        } catch (err) {
+            console.error(err);
+            return res.status(500).json({ message: 'Error saving uploaded image' });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Failed to add menu item" });
+    }
 }
 
-
-// ===  Update Menu Item ===
+// === Update Menu Item ===
 // Path: /api/restaurateur/menu/update
-
 const updateMenuItem = async (req, res, next) => {
     return res.status(200).json({ message: 'Update menu item' });
 }
 
-// ===  Delete Menu Item ===
+// === Delete Menu Item ===
 // Path: /api/restaurateur/menu/delete
-
 const deleteMenuItem = async (req, res, next) => {
     return res.status(200).json({ message: 'Delete menu item' });
 }
-
 
 module.exports = {
     registerRestaurant,
