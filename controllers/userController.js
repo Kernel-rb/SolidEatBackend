@@ -104,7 +104,13 @@ const updateProfile = async (req, res, next) => {
         if(emailExist && emailExist.id !== req.user.id) {
             return res.status(400).json({ message: 'Email already exists' });
         }
-        
+        const phoneNumberExist = await User.findOne({ phoneNumber });
+        if(phoneNumberExist && phoneNumberExist.id !== req.user.id) {
+            return res.status(400).json({ message: 'Phone number already exists' });
+        }
+
+        const updatedUser = await User.findByIdAndUpdate(req.user.id, { name, email, phoneNumber }, { new: true });
+        res.status(200).json({ message: 'User updated successfully', user: updatedUser });
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: "Update failed" });
