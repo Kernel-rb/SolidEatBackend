@@ -66,7 +66,21 @@ const registerRestaurant = async (req, res, next) => {
 
 const loginRestaurant = async (req, res, next) => {
     try {
-        
+        const { email, password } = req.body;
+        if(!email || !password) {
+            return res.status(400).json({ message: 'All fields are required' });
+        }
+        const restaurant = await Restaurant.findOne({ email: email });
+        if(!restaurant) {
+            return res.status(400).json({ message: 'Invalid credentials' });
+        }
+        const isMatch = await restaurant.matchPassword(password);
+        if(!isMatch) {
+            return res.status(400).json({ message: 'Invalid credentials' });
+        }
+        const { _id: id, name } = restaurant;
+        const token = jwt.sign({ id, name }, process.env.JWT_SECRET, { expiresIn: '1d' });
+        res.status(200).json({ token  , restaurant: { id, name } });
     }catch (error) {
         console.log(error);
         res.status(500).json({ message: "Login failed" });
