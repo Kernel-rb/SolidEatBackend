@@ -167,56 +167,29 @@ const updateRestaurant = async (req, res, next) => {
 // Path: /api/restaurateur/menu
 const myMenu = async (req, res, next) => {
     try {
-        const restaurantId = req.user.id;
-        const menuItems = await Menu.find({ restaurant: restaurantId });
-        if (menuItems.length === 0) {
-            return res.status(404).json({ message: 'No menu items found' });
-        }
-        res.status(200).json({ menuItems });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: "Failed to fetch menu" });
-    }
-}
-// === Add Menu Item ===
-// Path: /api/restaurateur/menu/add
-const addMenuItem = async (req, res, next) => {
-    try {
-        let { titre, prix, categorie, ingredients, status } = req.body;
-        const image = req.files ? req.files.image : null; 
-        if (!titre || !prix || !ingredients || !image) {
+        let { titre, prix, ingredients, categorie } = req.body;
+        if (!titre || !prix || !ingredients || !categorie) {
             return res.status(400).json({ message: 'All fields are required' });
         }
-        if (!image) {
-            return res.status(400).json({ message: 'Image file is missing' });
-        }
+        const { image } = req.files;
         if (image.size > 2000000) {
-            return res.status(400).json({ message: 'Image size too large' });
+            return res.status(400).json({ message: 'Image size must not exceed 2MB' });
         }
-        const allowedMimeTypes = ['image/jpeg', 'image/png'];
-        if (!allowedMimeTypes.includes(image.mimetype)) {
-            return res.status(400).json({ message: 'Invalid image format' });
-        }
-        const imageName = image.name;
-        const splitImage = imageName.split('.');
-        const newImageName = splitImage[0] + '-' + uuidv4() + '.' + splitImage[splitImage.length - 1];
-        try {
-            await image.mv(path.join(__dirname, '..', 'uploads', newImageName));
-            const newMenuItem = new Menu({
-                titre,
-                image: newImageName,
-                prix,
-                ingredients,
-                categorie,
-                status,
-                restaurant: req.user.id
-            });
-            await newMenuItem.save();
-            res.status(201).json({ message: 'Menu item added successfully' });
-        } catch (err) {
-            console.error(err);
-            return res.status(500).json({ message: 'Error saving uploaded image' });
-        }
+        let fileName = image.name;
+        let splittedFileName = fileName.split('.');
+        let newFileName = splittedFileName[0] + uuidv4() + '.' + splittedFileName[splittedFileName.length - 1];
+        image.mv(path.join(__dirname, '..', '/uploads', newFileName), async (err) => {
+            if (err) {
+                return res.status(500).json({ message: 'Failed to upload image' });
+            } else {
+                const newMenu = await Menu.create({ titre, image: newFileName, prix, ingredients, categorie, restaurant: req.user.id });
+                if (!newMenu) {
+                    return res.status(500).json({ message: 'Failed to add menu item' });
+                }
+                res.status(201).json({ message: 'Menu item added successfully' });
+            }
+        });
+
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Failed to add menu item" });
