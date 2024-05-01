@@ -167,6 +167,21 @@ const updateRestaurant = async (req, res, next) => {
 // Path: /api/restaurateur/menu
 const myMenu = async (req, res, next) => {
     try {
+        const restaurantId = req.user.id;
+        const menuItems = await Menu.find({ restaurant: restaurantId });
+        if (menuItems.length === 0) {
+            return res.status(404).json({ message: 'No menu items found' });
+        }
+        res.status(200).json({ menuItems });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Failed to fetch menu" });
+    }
+}
+// === Add Menu Item ===
+// Path: /api/restaurateur/menu/add
+const addMenuItem = async (req, res, next) => {
+    try {
         let { titre, prix, ingredients, categorie } = req.body;
         if (!titre || !prix || !ingredients || !categorie) {
             return res.status(400).json({ message: 'All fields are required' });
