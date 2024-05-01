@@ -1,4 +1,6 @@
 const Restaurant = require('../models/Restaurant');
+const Menu = require('../models/Menu');
+
 const jwt = require('jsonwebtoken');
 
 
@@ -70,26 +72,24 @@ const registerRestaurant = async (req, res, next) => {
 
 // === Restaurant Login ===
 // Path: /api/restaurateur/login
-
-
 const loginRestaurant = async (req, res, next) => {
     try {
         const { email, password } = req.body;
-        if(!email || !password) {
+        if (!email || !password) {
             return res.status(400).json({ message: 'All fields are required' });
         }
         const restaurant = await Restaurant.findOne({ email: email });
-        if(!restaurant) {
+        if (!restaurant) {
             return res.status(400).json({ message: 'Invalid credentials' });
         }
         const isMatch = await restaurant.matchPassword(password);
-        if(!isMatch) {
+        if (!isMatch) {
             return res.status(400).json({ message: 'Invalid credentials' });
         }
         const { _id: id, name } = restaurant;
         const token = jwt.sign({ id, name }, process.env.JWT_SECRET, { expiresIn: '1d' });
-        res.status(200).json({ token  , restaurant: { id, name } });
-    }catch (error) {
+        res.status(200).json({ token, restaurant: { id, name } });
+    } catch (error) {
         console.log(error);
         res.status(500).json({ message: "Login failed" });
     }
@@ -101,7 +101,7 @@ const loginRestaurant = async (req, res, next) => {
 const restaurantProfile = async (req, res, next) => {
     try {
         const restaurant = await Restaurant.findOne({ _id: req.user.id });
-        if(!restaurant) {
+        if (!restaurant) {
             return res.status(404).json({ message: 'Restaurant not found' });
         }
         res.status(200).json({
@@ -149,7 +149,7 @@ const updateRestaurant = async (req, res, next) => {
         }
 
         const updatedRestaurant = await Restaurant.findOneAndUpdate(
-            { _id: req.user.id }, 
+            { _id: req.user.id },
             { name, address, openingDays, openingHours, email, phoneNumber },
             { new: true }
         );
@@ -162,9 +162,18 @@ const updateRestaurant = async (req, res, next) => {
 }
 // ===  My menu ===
 // Path: /api/restaurateur/menu
-
 const myMenu = async (req, res, next) => {
-    return res.status(200).json({ message: 'My menu' });
+    try {
+        const restaurantId = req.user.id;
+        const menuItems = await Menu.find({ restaurant: restaurantId });
+        if (menuItems.length === 0) {
+            return res.status(404).json({ message: 'No menu items found' });
+        }
+        res.status(200).json({ menuItems });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Failed to fetch menu" });
+    }
 }
 
 // === Add Menu Item ===

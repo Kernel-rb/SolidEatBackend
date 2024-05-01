@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+const Menu = require('./Menu'); // Import the menu model
 
 const restaurantSchema = new mongoose.Schema({
   name: { type: String, required: true },
@@ -9,11 +10,7 @@ const restaurantSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   phonenumber: { type: String, required: true, unique: true },
-  menu: { type: Array },
-  status_of_menu: {
-    type: String,
-    enum: ["Publiée", "Reservée", "Offerte"]
-  },
+  menu: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Menu' }], 
   photos: { type: Array, of: String },
   openingHours: { type: String, required: true },
   openingDays: { type: String, required: true }
