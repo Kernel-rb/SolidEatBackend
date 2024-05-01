@@ -9,6 +9,10 @@ const restaurantSchema = new mongoose.Schema({
   email: { type: String, required: true },
   phoneNumber: { type: String, required: true },
   menu: { type: Array },
+  status_of_menu: {
+    type: String,
+    enum: ["Publiée", "Reservée", "Offerte"]
+  },
   photos: { type: Array, of: String },
   openingHours: {
     type: Object,
