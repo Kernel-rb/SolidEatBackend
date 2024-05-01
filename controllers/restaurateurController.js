@@ -99,17 +99,67 @@ const loginRestaurant = async (req, res, next) => {
 // Path: /api/restaurateur/profile
 
 const restaurantProfile = async (req, res, next) => {
-    return res.status(200).json({ message: 'Restaurant profile' });
+    try {
+        const restaurant = await Restaurant.findOne({ _id: req.user.id });
+        if(!restaurant) {
+            return res.status(404).json({ message: 'Restaurant not found' });
+        }
+        res.status(200).json({
+            name: restaurant.name,
+            email: restaurant.email,
+            phonenumber: restaurant.phonenumber,
+            address: restaurant.address,
+            openingHours: restaurant.openingHours,
+            openingDays: restaurant.openingDays
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Profile failed" });
+    }
 }
 
 // === Update Restaurant Information ===
 // Path: /api/restaurateur/update
 
 const updateRestaurant = async (req, res, next) => {
-    return res.status(200).json({ message: 'Update restaurant' });
+    try {
+        const { name, address, openingDays, openingHours, email, phoneNumber } = req.body;
+        if (!name || !address || !openingDays || !openingHours || !email || !phoneNumber) {
+            return res.status(400).json({ message: 'All fields are required' });
+        }
+
+        const restaurant = await Restaurant.findOne({ _id: req.user.id });
+        if (!restaurant) {
+            return res.status(404).json({ message: 'Restaurant not found' });
+        }
+
+        const nameExist = await Restaurant.findOne({ name: name });
+        if (nameExist && nameExist._id.toString() !== req.user.id) {
+            return res.status(400).json({ message: 'Name already exists' });
+        }
+
+        const emailExist = await Restaurant.findOne({ email: email });
+        if (emailExist && emailExist._id.toString() !== req.user.id) {
+            return res.status(400).json({ message: 'Email already exists' });
+        }
+
+        const phoneNumberExist = await Restaurant.findOne({ phoneNumber: phoneNumber });
+        if (phoneNumberExist && phoneNumberExist._id.toString() !== req.user.id) {
+            return res.status(400).json({ message: 'Phone number already exists' });
+        }
+
+        const updatedRestaurant = await Restaurant.findOneAndUpdate(
+            { _id: req.user.id }, 
+            { name, address, openingDays, openingHours, email, phoneNumber },
+            { new: true }
+        );
+
+        res.status(200).json({ message: 'Update successful' });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Update failed" });
+    }
 }
-
-
 // ===  My menu ===
 // Path: /api/restaurateur/menu
 

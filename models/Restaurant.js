@@ -16,7 +16,7 @@ const restaurantSchema = new mongoose.Schema({
   },
   photos: { type: Array, of: String },
   openingHours: { type: String, required: true },
-  openingDays: { type: String, required: true },
+  openingDays: { type: String, required: true }
 });
 
 restaurantSchema.methods.comparePassword = async function (candidatePassword) {
