@@ -1,48 +1,52 @@
 const mongoose = require('mongoose');
-const bcryptjs = require('bcryptjs');
+const bcrypt = require('bcryptjs');
 
 const restaurantSchema = new mongoose.Schema({
   name: { type: String, required: true },
   address: { type: String, required: true },
   description: { type: String },
   cuisine: { type: String },
-  email: { type: String, required: true },
-  phoneNumber: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  phonenumber: { type: String, required: true, unique: true },
   menu: { type: Array },
   status_of_menu: {
     type: String,
     enum: ["Publiée", "Reservée", "Offerte"]
   },
   photos: { type: Array, of: String },
-  openingHours: {
-    type: Object,
-    required: true,
-    properties: {
-      days: { type: Array, required: true, enum: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'] },
-      openTime: { type: String, required: true },
-      closeTime: { type: String, required: true },
-    }
-  },
+  openingHours: { type: String, required: true },
+  openingDays: { type: String, required: true },
 });
 
-const restaurantOwnerSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-  restaurant: { type: restaurantSchema, required: true }
-});
-
-restaurantOwnerSchema.methods.comparePassword = async function (candidatePassword) {
-  return await bcryptjs.compare(candidatePassword, this.password);
+restaurantSchema.methods.comparePassword = async function (candidatePassword) {
+  return await bcrypt.compare(candidatePassword, this.password);
 };
 
-restaurantOwnerSchema.pre('save', async function (next) {
-  if (!this.isModified('password')) {
-    return next();
+restaurantSchema.pre('save', async function (next) {
+  try {
+    if (!this.isModified('password')) {
+      return next();
+    }
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+    next();
+  } catch (error) {
+    next(error);
   }
-  const salt = await bcryptjs.genSalt(10);
-  this.password = await bcryptjs.hash(this.password, salt);
-  next();
 });
 
-module.exports = mongoose.model('RestaurantOwner', restaurantOwnerSchema);
+restaurantSchema.post('save', function (error, doc, next) {
+  if (error.name === 'MongoError' && error.code === 11000) {
+    const uniqueKey = Object.keys(error.keyValue)[0];
+    const message = `Duplicate key error: ${uniqueKey} '${error.keyValue[uniqueKey]}' already exists.`;
+    return next(new Error(message));
+  }
+  next(error);
+});
+
+restaurantSchema.methods.matchPassword = async function (enteredPassword) {
+  return await bcrypt.compare(enteredPassword, this.password);
+};
+
+module.exports = mongoose.model('Restaurant', restaurantSchema);

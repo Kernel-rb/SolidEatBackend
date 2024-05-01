@@ -7,8 +7,8 @@ const jwt = require('jsonwebtoken');
 
 const registerRestaurant = async (req, res, next) => {
     try {
-        const { name, address, openingHours, email, confirmEmail, password, confirmPassword, phoneNumber } = req.body;
-        if(!name || !address || !openingHours || !email || !password || !phoneNumber) {
+        const { name, address, openingDays, openingHours, email, confirmEmail, password, confirmPassword, phoneNumber } = req.body;
+        if (!name || !address || !openingDays || !openingHours || !email || !confirmEmail || !password || !confirmPassword || !phoneNumber) {
             return res.status(400).json({ message: 'All fields are required' });
         }
 
@@ -21,7 +21,7 @@ const registerRestaurant = async (req, res, next) => {
         if (nameExist) {
             return res.status(400).json({ message: 'Name already exists' });
         }
-        if(email !== confirmEmail) {
+        if (email !== confirmEmail) {
             return res.status(400).json({ message: 'Emails do not match' });
         }
         const newEmail = email.toLowerCase();
@@ -29,17 +29,17 @@ const registerRestaurant = async (req, res, next) => {
         if (emailExist) {
             return res.status(400).json({ message: 'Email already exists' });
         }
-        if(password.trim().length < 6) {
+        if (password.trim().length < 6) {
             return res.status(400).json({ message: 'Password must be at least 6 characters long' });
         }
-        if(password !== confirmPassword) {
+        if (password !== confirmPassword) {
             return res.status(400).json({ message: 'Passwords do not match' });
         }
-        if(phoneNumber.length !== 10) {
+        if (phoneNumber.length !== 10) {
             return res.status(400).json({ message: 'Phone number must be 10 digits long' });
         }
         regexp = /^[0-9]*$/;
-        if(!regexp.test(phoneNumber)) {
+        if (!regexp.test(phoneNumber)) {
             return res.status(400).json({ message: 'Phone number must contain only numbers' });
         }
         const phoneNumberExist = await Restaurant.findOne({ phoneNumber: phoneNumber });
@@ -49,20 +49,28 @@ const registerRestaurant = async (req, res, next) => {
         const newRestaurant = new Restaurant({
             name,
             address,
+            openingDays,
             openingHours,
             email: newEmail,
-            phoneNumber,
+            phonenumber: phoneNumber,
             password
         });
+
         await newRestaurant.save();
-    }catch (error) {
+
+        // Send a success response
+        res.status(201).json({ message: 'Restaurant registered successfully' });
+    } catch (error) {
         console.log(error);
         res.status(500).json({ message: "Registration failed" });
     }
 }
 
+
+
 // === Restaurant Login ===
 // Path: /api/restaurateur/login
+
 
 const loginRestaurant = async (req, res, next) => {
     try {

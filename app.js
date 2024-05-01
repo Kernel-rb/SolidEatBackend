@@ -15,11 +15,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 
 app.use('/api/users', userRoutes);
-app.use('/api/restaurent', restaurentRoutes);
+app.use('/api/restaurateur', restaurentRoutes);
 app.use(notFound);
 app.use(errorHandler);
 
 
 connect(process.env.MONGO_URI)
-    .then(app.listen(5000, () => console.log(`Server is Running on ${process.env.PORT} `)))
-    .catch(err => console.log(err));
+    .then(() => {
+        app.listen(5000, () => console.log(`Server is Running on http://localhost:5000`));
+        console.log('Connected to MongoDB');
+    })
+    .catch(err => console.error('Error connecting to MongoDB:', err));
