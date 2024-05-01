@@ -1,9 +1,24 @@
 const { Router } = require('express');
-
+const { registerRestaurant,
+    loginRestaurant,
+    restaurantProfile,
+    updateRestaurant,
+    myMenu,
+    addMenuItem,
+    updateMenuItem,
+    deleteMenuItem
+} = require('../controllers/restaurateurController');
+const authMiddleware = require('../middlewares/authMiddleware');
 const router = Router();
 
-router.get('/', (req, res, next) => {
-    res.send('Hello from restaurentRoutes');
-});
+router.post('/register', registerRestaurant);
+router.post('/login', loginRestaurant);
+router.get('/profile', authMiddleware, restaurantProfile);
+router.patch('/update', authMiddleware, updateRestaurant);
+router.get('/menu', authMiddleware, myMenu);
+router.post('/menu/add', authMiddleware, addMenuItem);
+router.patch('/menu/update', authMiddleware, updateMenuItem);
+router.delete('/menu/delete', authMiddleware, deleteMenuItem);
+
 
 module.exports = router;
