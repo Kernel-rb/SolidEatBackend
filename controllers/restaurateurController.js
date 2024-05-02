@@ -179,10 +179,13 @@ const myMenu = async (req, res, next) => {
         res.status(500).json({ message: "Failed to fetch menu" });
     }
 }
-    // === Add Menu Item ===
-    // Path: /api/restaurateur/menu/add
+// === Add Menu Item ===
+// Path: /api/restaurateur/menu/add
 const addMenuItem = async (req, res, next) => {
     try {
+        console.log("** Request Body **");
+        console.log(req.body); // Log the entire request body
+
         // Extract data from request body
         const { titre, prix, ingredients, categorie } = req.body;
 
@@ -191,18 +194,30 @@ const addMenuItem = async (req, res, next) => {
             return res.status(400).json({ message: 'All fields are required' });
         }
 
+        console.log("** Extracted Data **");
+        console.log({ titre, prix, ingredients, categorie }); // Log extracted data
+
         // Check for image file
         if (!req.file) {
             return res.status(400).json({ message: 'Image file is missing' });
         }
 
         // Extract image data
-        const { filename: newFileName } = req.file;
+        const { size, filename, destination } = req.file;
+
+        // Validate image size
+        if (size > 2000000) {
+            return res.status(400).json({ message: 'Image size must not exceed 2MB' });
+        }
+
+        // Move uploaded image to uploads folder
+        const imagePath = path.join(destination, filename);
+        console.log("Image Path:", imagePath);
 
         // Create a new Menu item with data from request and uploaded image filename
         const newMenu = await Menu.create({
             titre,
-            image: newFileName,
+            image: filename,
             prix,
             ingredients,
             categorie,
@@ -214,11 +229,14 @@ const addMenuItem = async (req, res, next) => {
         }
 
         res.status(201).json({ message: 'Menu item added successfully' });
+
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Failed to add menu item" });
     }
 };
+
+
 
 
 
