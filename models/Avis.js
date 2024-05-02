@@ -1,11 +1,14 @@
 const mongoose = require('mongoose');
 
-const avisSchema = new mongoose.Schema({
-    restaurant: { type: mongoose.Schema.Types.ObjectId, ref: 'Restaurant', required: true },
-    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-    rating: { type: Number, required: true, min: 1, max: 5 },
-    comment: { type: String },
-    createdAt: { type: Date, default: Date.now }
+const schemaAvis = new mongoose.Schema({
+    restaurantId: { type: mongoose.Schema.Types.ObjectId, ref: 'Restaurant', required: true },
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    contenu: { type: String, required: true },
+    notation: { type: Number, required: true },
+    createdAt: { type: Date, default: Date.now },
+    updatedAt: { type: Date, default: Date.now }
 });
 
-module.exports = mongoose.model('Avis', avisSchema);
+const Avis = mongoose.model('Avis', schemaAvis);
+
+module.exports = Avis;

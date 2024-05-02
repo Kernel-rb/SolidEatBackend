@@ -1,5 +1,7 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
+const Restaurant = require('../models/Restaurant');
+const Menu = require('../models/Menu');
 
 // === Register User ===
 const registerUser = async (req, res, next) => {
@@ -130,12 +132,37 @@ const updateProfile = async (req, res, next) => {
     }
 }
 
-// 
+//=== Get all Restaurants ===
+const allRestaurants = async (req, res, next) => {
+    try {
+        const restaurants = await Restaurant.find();
+        res.status(200).json(restaurants);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Failed to get restaurants" });
+    }
+}
 
+
+// === Get all Menus ===
+const allMenus = async (req, res, next) => {
+    try {
+        const menus = await Menu.find();
+        if (menus.length === 0) {
+            return res.status(404).json({ message: "No menus available" });
+        }
+        res.status(200).json(menus);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Failed to get menus" });
+    }
+}
 
 module.exports = {
     registerUser,
     loginUser,
     userProfile,
     updateProfile,
+    allRestaurants,
+    allMenus
 }

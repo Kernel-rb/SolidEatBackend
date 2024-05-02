@@ -6,6 +6,7 @@ const { connect } = require('mongoose');
 
 const userRoutes = require('./routes/userRoutes');
 const restaurentRoutes = require('./routes/restaurentRoutes');
+const avisRoutes = require('./routes/avisRoutes');
 const { notFound, errorHandler } = require('./middleware/errorMiddleware');
 
 const app = express();
@@ -16,6 +17,8 @@ app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 
 app.use('/api/users', userRoutes);
 app.use('/api/restaurateur', restaurentRoutes);
+app.use('/api/avis', avisRoutes);
+app.use('/uploads', express.static('uploads'));
 app.use(notFound);
 app.use(errorHandler);
 

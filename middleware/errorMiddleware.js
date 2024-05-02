@@ -8,7 +8,7 @@ const notFound = (req, res, next) => {
 const errorHandler = (error, req, res, next) => {
     if (res.headersSent) { return next(error); }
 
-    res.status(res.code || 500).json({ message: error.message || "Unknown error occured 🦊" });
+    res.status(res.code || 500).json({ message: error.message || "Unknown error occured" });
 };
 
 
