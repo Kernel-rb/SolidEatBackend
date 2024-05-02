@@ -18,8 +18,8 @@ router.post('/login', loginRestaurant);
 router.get('/profile', authMiddleware, restaurantProfile);
 router.patch('/update', authMiddleware, updateRestaurant);
 router.get('/menu', authMiddleware, myMenu);
-router.post('/menu/add', upload.single('image'), addMenuItem);
-router.patch('/menu/update/:id', authMiddleware, updateMenuItem);
+router.post('/menu/add', authMiddleware, upload.single('image'), addMenuItem);
+router.patch('/menu/update/:id', authMiddleware, upload.single('image'), updateMenuItem);
 router.delete('/menu/delete/:id', authMiddleware, deleteMenuItem);
 
 module.exports = router;

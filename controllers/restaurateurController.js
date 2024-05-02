@@ -7,11 +7,6 @@ const path = require('path');
 const { v4: uuidv4 } = require('uuid');
 const upload = require('../middleware/uploadMiddleware');
 
-
-
-
-
-
 // === Restaurant Registration ===
 // Path: /api/restaurateur/register
 const registerRestaurant = async (req, res, next) => {
@@ -181,6 +176,7 @@ const myMenu = async (req, res, next) => {
 }
 // === Add Menu Item ===
 // Path: /api/restaurateur/menu/add
+// restaurateurController.js
 const addMenuItem = async (req, res, next) => {
     try {
         console.log("** Request Body **");
@@ -197,27 +193,36 @@ const addMenuItem = async (req, res, next) => {
         console.log("** Extracted Data **");
         console.log({ titre, prix, ingredients, categorie }); // Log extracted data
 
-        // Check for image file
-        if (!req.file) {
-            return res.status(400).json({ message: 'Image file is missing' });
+        let newFileName = null;
+
+        // Check if an image file is included in the request
+        if (req.files && req.files.image) {
+            // Extract image data
+            const { image } = req.files;
+
+            // Validate image size
+            if (image.size > 2000000) {
+                return res.status(400).json({ message: 'Image size must not exceed 2MB' });
+            }
+
+            // Generate unique filename
+            const fileName = image.name;
+            const splittedFileName = fileName.split('.');
+            newFileName = splittedFileName[0] + uuidv4() + '.' + splittedFileName[splittedFileName.length - 1];
+
+            // Move uploaded image to uploads folder
+            const imagePath = path.join(__dirname, '..', '/uploads', newFileName);
+            console.log("Image Path:", imagePath);
+            await image.mv(imagePath);
+
+            console.log("** Uploaded Files **");
+            console.log(req.files); // Log all uploaded files
         }
 
-        // Extract image data
-        const { size, filename, destination } = req.file;
-
-        // Validate image size
-        if (size > 2000000) {
-            return res.status(400).json({ message: 'Image size must not exceed 2MB' });
-        }
-
-        // Move uploaded image to uploads folder
-        const imagePath = path.join(destination, filename);
-        console.log("Image Path:", imagePath);
-
-        // Create a new Menu item with data from request and uploaded image filename
+        // Create a new Menu item with data from request
         const newMenu = await Menu.create({
             titre,
-            image: filename,
+            image: newFileName, // Pass the newFileName or null if no image was provided
             prix,
             ingredients,
             categorie,
@@ -229,19 +234,14 @@ const addMenuItem = async (req, res, next) => {
         }
 
         res.status(201).json({ message: 'Menu item added successfully' });
-
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Failed to add menu item" });
     }
 };
 
-
-
-
-
 // === Update Menu Item ===
-// Path: /api/restaurateur/menu/update
+// Path: /api/restaurateur/menu/update/:id
 const updateMenuItem = async (req, res, next) => {
     try {
         let fileName;
@@ -249,9 +249,9 @@ const updateMenuItem = async (req, res, next) => {
         let updatedMenu;
         const menuId = req.params.id;
         const { titre, prix, ingredients } = req.body;
-        if (!titre || !prix || !ingredients) {
-            return res.status(400).json({ message: 'All fields are required' });
-        }
+        // if (!titre || !prix || !ingredients) {
+        //     return res.status(400).json({ message: 'All fields are required' });
+        // }
         if (!req.files) {
             updatedMenu = await Menu.findByIdAndUpdate(menuId, { titre, prix, ingredients }, { new: true });
         } else {
@@ -285,9 +285,10 @@ const updateMenuItem = async (req, res, next) => {
         console.error(error);
         res.status(500).json({ message: 'Failed to update menu item' });
     }
-}
+};
+
 // === Delete Menu Item ===
-// Path: /api/restaurateur/menu/delete
+// Path: /api/restaurateur/menu/delete/:id
 const deleteMenuItem = async (req, res, next) => {
     try {
         const menuId = req.params.id;
