@@ -130,6 +130,8 @@ const updateProfile = async (req, res, next) => {
     }
 }
 
+// 
+
 
 module.exports = {
     registerUser,

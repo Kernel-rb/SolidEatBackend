@@ -293,27 +293,42 @@ const deleteMenuItem = async (req, res, next) => {
     try {
         const menuId = req.params.id;
         if (!menuId) {
-            return res.status(400).json({ message: 'Menu item not found' });
+            return res.status(400).json({ message: 'Menu item ID is required' });
         }
         const menu = await Menu.findById(menuId);
         if (!menu) {
             return res.status(404).json({ message: 'Menu item not found' });
         }
-        const fileName = menu?.image;
-        fs.unlink(path.join(__dirname + `../uploads/${fileName}`), async (err) => {
+        const fileName = menu.image;
+        // Delete all files in the uploads folder
+        fs.readdir(path.join(__dirname, '../uploads'), async (err, files) => {
             if (err) {
                 console.error(err);
                 return res.status(500).json({ message: 'Failed to delete menu item' });
-            } else {
-                await Menu.findByIdAndDelete(menuId);
-                res.status(200).json({ message: 'Menu item deleted successfully' });
             }
+
+            // Loop through each file and delete it
+            for (const file of files) {
+                fs.unlink(path.join(__dirname, '../uploads', file), async (err) => {
+                    if (err) {
+                        console.error(err);
+                        return res.status(500).json({ message: 'Failed to delete menu item' });
+                    }
+                });
+            }
+
+            // Delete the menu item from the database
+            await Menu.findByIdAndDelete(menuId);
+            res.status(200).json({ message: 'Menu item deleted successfully' });
         });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Failed to delete menu item' });
     }
 }
+
+
+
 
 module.exports = {
     registerRestaurant,
