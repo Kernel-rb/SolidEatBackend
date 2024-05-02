@@ -7,10 +7,10 @@ const restaurantSchema = new mongoose.Schema({
   address: { type: String, required: true },
   description: { type: String },
   cuisine: { type: String },
-  email: { type: String, required: true, unique: true, sparse: true },
+  email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   phonenumber: { type: String, required: true, unique: true },
-  menu: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Menu' }], 
+  menu: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Menu' }],
   photos: { type: Array, of: String },
   openingHours: { type: String, required: true },
   openingDays: { type: String, required: true }
