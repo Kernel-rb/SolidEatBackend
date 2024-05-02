@@ -83,7 +83,7 @@ const loginUser = async (req, res, next) => {
     } catch (error) {
         console.error('Error logging in user:', error);
         res.status(500).json({ message: "Login failed. Please try again later." });
-    }
+    }   
 }
 
 // === My profile ===
