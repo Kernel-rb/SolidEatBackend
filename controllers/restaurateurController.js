@@ -183,36 +183,24 @@ const myMenu = async (req, res, next) => {
 const addMenuItem = async (req, res, next) => {
     try {
         const { titre, prix, ingredients, categorie } = req.body;
-
-        // Check if all required fields are present
         if (!titre || !prix || !ingredients || !categorie) {
             return res.status(400).json({ message: 'All fields are required' });
         }
-
-        // Check if image file is present
         if (!req.files || !req.files.image) {
             return res.status(400).json({ message: 'Image file is missing' });
         }
-
         const { image } = req.files;
-
-        // Check image size
         if (image.size > 2000000) {
             return res.status(400).json({ message: 'Image size must not exceed 2MB' });
         }
-
-        // Generate a new file name to avoid conflicts
         const fileName = image.name;
         const splittedFileName = fileName.split('.');
         const newFileName = splittedFileName[0] + uuidv4() + '.' + splittedFileName[splittedFileName.length - 1];
-
-        // Move the image file to the uploads directory
         image.mv(path.join(__dirname, '..', '/uploads', newFileName), async (err) => {
             if (err) {
-                console.error(err); // Log the error for debugging
+                console.error(err); 
                 return res.status(500).json({ message: 'Failed to upload image' });
             } else {
-                // Create a new menu item with the uploaded image
                 const newMenu = await Menu.create({
                     titre,
                     image: newFileName,
@@ -228,7 +216,7 @@ const addMenuItem = async (req, res, next) => {
             }
         });
     } catch (error) {
-        console.error(error); // Log the error for debugging
+        console.error(error);
         res.status(500).json({ message: "Failed to add menu item" });
     }
 }
