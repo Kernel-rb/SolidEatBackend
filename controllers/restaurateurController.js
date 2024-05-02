@@ -238,13 +238,75 @@ const addMenuItem = async (req, res, next) => {
 // === Update Menu Item ===
 // Path: /api/restaurateur/menu/update
 const updateMenuItem = async (req, res, next) => {
-    return res.status(200).json({ message: 'Update menu item' });
+    try {
+        let fileName;
+        let newFileName;
+        let updatedMenu;
+        const menuId = req.params.id;
+        const { titre, prix, ingredients } = req.body;
+        if (!titre || !prix || !ingredients) {
+            return res.status(400).json({ message: 'All fields are required' });
+        }
+        if (!req.files) {
+            updatedMenu = await Menu.findByIdAndUpdate(menuId, { titre, prix, ingredients }, { new: true });
+        } else {
+            const oldMenu = await Menu.findById(menuId);
+            fs.unlink(path.join(__dirname + `../uploads/${oldMenu.image}`), async (err) => {
+                if (err) {
+                    console.error(err);
+                    return res.status(500).json({ message: 'Failed to update menu item' });
+                }
+            });
+            const { image } = req.files;
+            if (image.size > 2000000) {
+                return res.status(400).json({ message: 'Image size must not exceed 2MB' });
+            }
+            fileName = image.name;
+            const splittedFileName = fileName.split('.');
+            newFileName = splittedFileName[0] + uuidv4() + '.' + splittedFileName[splittedFileName.length - 1];
+            image.mv(path.join(__dirname, '..', '/uploads', newFileName), async (err) => {
+                if (err) {
+                    console.error(err);
+                    return res.status(500).json({ message: 'Failed to upload image' });
+                }
+            });
+            updatedMenu = await Menu.findByIdAndUpdate(menuId, { titre, image: newFileName, prix, ingredients }, { new: true });
+            if (!updatedMenu) {
+                return res.status(500).json({ message: 'Failed to update menu item' });
+            }
+            res.status(200).json({ message: 'Menu item updated successfully' });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Failed to update menu item' });
+    }
 }
-
 // === Delete Menu Item ===
 // Path: /api/restaurateur/menu/delete
 const deleteMenuItem = async (req, res, next) => {
-    return res.status(200).json({ message: 'Delete menu item' });
+    try {
+        const menuId = req.params.id;
+        if (!menuId) {
+            return res.status(400).json({ message: 'Menu item not found' });
+        }
+        const menu = await Menu.findById(menuId);
+        if (!menu) {
+            return res.status(404).json({ message: 'Menu item not found' });
+        }
+        const fileName = menu?.image;
+        fs.unlink(path.join(__dirname + `../uploads/${fileName}`), async (err) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).json({ message: 'Failed to delete menu item' });
+            } else {
+                await Menu.findByIdAndDelete(menuId);
+                res.status(200).json({ message: 'Menu item deleted successfully' });
+            }
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Failed to delete menu item' });
+    }
 }
 
 module.exports = {
