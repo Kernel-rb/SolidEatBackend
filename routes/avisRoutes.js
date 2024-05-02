@@ -1,9 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const middlewareAuth = require('../middleware/authMiddleware'); 
-const { createAvis, getAvisByRestaurantId } = require('../controllers/avisController');
+const middlewareAuth = require('../middleware/authMiddleware');
+const { creerAvis, obtenirAvisRestaurant } = require('../controllers/avisController');
 
-router.post('/avis', middlewareAuth, createAvis); 
-router.get('/restaurants/:restaurantId/avis', getAvisByRestaurantId); 
+// Utilisez la fonction creerAvis comme callback pour POST /avis
+router.post('/', middlewareAuth, creerAvis);
+
+// Utilisez la fonction obtenirAvisRestaurant comme callback pour GET /restaurants/:restaurantId/avis
+router.get('/restaurants/:restaurantId/avis', obtenirAvisRestaurant);
 
 module.exports = router;
