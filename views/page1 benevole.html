@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <style>
+    .container {
+      background-color: #fff;
+      color: #000;
+      display: flex;
+      flex-direction: column;
+      font-size: 10px;
+      font-weight: 400;
+      margin: 0 auto;
+      max-width: 480px;
+      padding: 21px 44px;
+      width: 100%;
+    }
+  
+    .hero-image {
+      aspect-ratio: 2;
+      max-width: 100%;
+      object-fit: auto;
+      object-position: center;
+      width: 171px;
+    }
+  
+    .hero-title {
+      font: 26px/36px Alata, sans-serif;
+      letter-spacing: -0.78px;
+      margin-top: 21px;
+    }
+  
+    .card-container {
+      display: flex;
+      gap: 20px;
+      margin-top: 33px;
+    }
+  
+    .card {
+      background-color: #fcfcfc;
+      border-radius: 15px;
+      box-shadow: 0px 1px 3px 2px rgba(0, 0, 0, 0.12);
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      padding: 0 5px 13px;
+    }
+  
+    .card-image {
+      align-self: center;
+      aspect-ratio: 1.41;
+      max-width: 100%;
+      object-fit: auto;
+      object-position: center;
+      width: 119px;
+    }
+  
+    .card-title {
+      font: 17px Alata, sans-serif;
+      margin-top: 17px;
+    }
+  
+    .card-restaurant {
+      display: flex;
+      gap: 4px;
+      margin-top: 6px;
+    }
+  
+    .card-restaurant-icon {
+      aspect-ratio: 1;
+      object-fit: auto;
+      object-position: center;
+      width: 13px;
+    }
+  
+    .card-restaurant-name {
+      flex-basis: auto;
+      flex-grow: 1;
+      font-family: Antic, sans-serif;
+      margin: auto 0;
+    }
+  
+    .card-address {
+      display: flex;
+      gap: 4px;
+      margin-top: 5px;
+    }
+  
+    .card-address-icon {
+      aspect-ratio: 1;
+      object-fit: auto;
+      object-position: center;
+      width: 13px;
+    }
+  
+    .card-address-text {
+      flex-basis: auto;
+      flex-grow: 1;
+      font-family: Antic, sans-serif;
+    }
+  
+    .card-button {
+      background-color: #26cf6f;
+      border-radius: 10px;
+      color: #fff;
+      font: 12px Alata, sans-serif;
+      justify-content: center;
+      margin-top: 13px;
+      padding: 10px 52px;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+  
+    .card-alt {
+      background-color: #fcfcfc;
+      border-radius: 15px;
+      box-shadow: 0px 1px 3px 2px rgba(0, 0, 0, 0.12);
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      padding: 13px 5px;
+    }
+  
+    .card-alt-image {
+      align-self: center;
+      aspect-ratio: 1.43;
+      max-width: 100%;
+      object-fit: auto;
+      object-position: center;
+      width: 119px;
+    }
+  
+    .card-alt-title {
+      font: 17px Alata, sans-serif;
+      margin-top: 4px;
+    }
+  
+    .featured-image {
+      aspect-ratio: 1.64;
+      border-radius: 15px;
+      box-shadow: 0px 1px 3px 2px rgba(0, 0, 0, 0.12);
+      margin-top: 30px;
+      object-fit: auto;
+      object-position: center;
+      width: 100%;
+    }
+  </style>
+  
+  <main class="container">
+    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/7b3847e3b6396aa24f0a50dd05249389ec8badaf0b7c500fb564cf4cd4661b8c?apiKey=74c09cb2429b4b1a996fb9eea1af5334&" alt="Hero image" class="hero-image" />
+    <h1 class="hero-title">Trouver quelque chose chaude à manger</h1>
+  
+    <section class="card-container">
+      <article class="card">
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/e8938bd7c9730e52474abe700c0ac90ea245623f5d802301386387617706ac45?apiKey=74c09cb2429b4b1a996fb9eea1af5334&" alt="Salade au poulet" class="card-image" />
+        <h2 class="card-title">Salade au poulet</h2>
+        <div class="card-restaurant">
+          <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/fbba3a9e2f4fe3c27cfa55444be9fef1cc347d6a759502545c501af6e028189a?apiKey=74c09cb2429b4b1a996fb9eea1af5334&" alt="Restaurant icon" class="card-restaurant-icon" />
+          <p class="card-restaurant-name">Restaurant de la ville</p>
+        </div>
+        <div class="card-address">
+          <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/2c5d990a4cfa04179091c08b87c6782071bd88fb0e66932f05eb9c52f4841ab4?apiKey=74c09cb2429b4b1a996fb9eea1af5334&" alt="Address icon" class="card-address-icon" />
+          <p class="card-address-text">19 rue de Paris, 92010</p>
+        </div>
+        <button class="card-button">Réserver</button>
+      </article>
+  
+      <article class="card-alt">
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/72231d1526b95e464e3b4f39d76d18a663d56c4b35c209559760621aa582929b?apiKey=74c09cb2429b4b1a996fb9eea1af5334&" alt="Soupe aux légumes" class="card-alt-image" />
+        <h2 class="card-alt-title">Soupe aux légu...</h2>
+        <div class="card-restaurant">
+          <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/fbba3a9e2f4fe3c27cfa55444be9fef1cc347d6a759502545c501af6e028189a?apiKey=74c09cb2429b4b1a996fb9eea1af5334&" alt="Restaurant icon" class="card-restaurant-icon" />
+          <p class="card-restaurant-name">Restaurant de la ville</p>
+        </div>
+        <div class="card-address">
+          <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/2c5d990a4cfa04179091c08b87c6782071bd88fb0e66932f05eb9c52f4841ab4?apiKey=74c09cb2429b4b1a996fb9eea1af5334&" alt="Address icon" class="card-address-icon" />
+          <p class="card-address-text">02 rue Jhon Jorès, 93011</p>
+        </div>
+        <button class="card-button">Réserver</button>
+      </article>
+    </section>
+  
+    <section class="card-container">
+      <article class="card">
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/e8938bd7c9730e52474abe700c0ac90ea245623f5d802301386387617706ac45?apiKey=74c09cb2429b4b1a996fb9eea1af5334&" alt="Salade au poulet" class="card-image" />
+        <h2 class="card-title">Salade au poulet</h2>
+        <div class="card-restaurant">
+          <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/fbba3a9e2f4fe3c27cfa55444be9fef1cc347d6a759502545c501af6e028189a?apiKey=74c09cb2429b4b1a996fb9eea1af5334&" alt="Restaurant icon" class="card-restaurant-icon" />
+          <p class="card-restaurant-name">Restaurant de la ville</p>
+        </div>
+        <div class="card-address">
+          <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/2c5d990a4cfa04179091c08b87c6782071bd88fb0e66932f05eb9c52f4841ab4?apiKey=74c09cb2429b4b1a996fb9eea1af5334&" alt="Address icon" class="card-address-icon" />
+          <p class="card-address-text">19 rue de Paris, 92010</p>
+        </div>
+        <button class="card-button">Réserver</button>
+      </article>
+  
+      <article class="card-alt">
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/72231d1526b95e464e3b4f39d76d18a663d56c4b35c209559760621aa582929b?apiKey=74c09cb2429b4b1a996fb9eea1af5334&" alt="Soupe aux légumes" class="card-alt-image" />
+        <h2 class="card-alt-title">Soupe aux légu...</h2>
+        <div class="card-restaurant">
+          <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/fbba3a9e2f4fe3c27cfa55444be9fef1cc347d6a759502545c501af6e028189a?apiKey=74c09cb2429b4b1a996fb9eea1af5334&" alt="Restaurant icon" class="card-restaurant-icon" />
+          <p class="card-restaurant-name">Restaurant de la ville</p>
+        </div>
+        <div class="card-address">
+          <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/2c5d990a4cfa04179091c08b87c6782071bd88fb0e66932f05eb9c52f4841ab4?apiKey=74c09cb2429b4b1a996fb9eea1af5334&" alt="Address icon" class="card-address-icon" />
+          <p class="card-address-text">02 rue Jhon Jorès, 93011</p>
+        </div>
+        <button class="card-button">Réserver</button>
+      </article>
+    </section>
+  
+    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/090b23ed86c5c76c4205c0f7f7c1a854e180fa8ea13d2e643faf24103b64a774?apiKey=74c09cb2429b4b1a996fb9eea1af5334&" alt="Featured image" class="featured-image" />
+  </main>
+</body>
+</html>

@@ -1,0 +1,166 @@
+.restaurant-finder {
+    background-color: #fff;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    font-size: 13px;
+    font-weight: 400;
+    margin: 0 auto;
+    max-width: 480px;
+    padding: 18px 44px 38px;
+    width: 100%;
+}
+
+.restaurant-finder__image {
+    aspect-ratio: 2;
+    max-width: 100%;
+    object-fit: auto;
+    object-position: center;
+    width: 171px;
+}
+
+.restaurant-finder__title {
+    letter-spacing: -0.78px;
+    margin-top: 21px;
+    font-family: Ubuntu, sans-serif;
+    font-size: 28px;
+    line-height: 36px;
+}
+
+.restaurant-card__name,
+.restaurant-card__address-text,
+.restaurant-card__hours-text,
+.restaurant-card__days-text,
+.restaurant-card__phone-text,
+.restaurant-finder__cta-button-text {
+    font-family: Montserrat, sans-serif;
+    color: #000;
+    font-size: 12px;
+}
+
+.restaurant-finder {
+    background-color: #fff;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    font-size: 13px;
+    font-weight: 400;
+    margin: 0 auto;
+    max-width: 480px;
+    padding: 18px 44px 38px;
+    width: 100%;
+}
+
+.restaurant-finder__title {
+    letter-spacing: -0.78px;
+    margin-top: 21px;
+    font-family: Ubuntu, sans-serif;
+    font-size: 28px;
+    line-height: 36px;
+}
+
+.restaurant-card {
+    background-color: #fcfcfc;
+    border-radius: 15px;
+    box-shadow: 0px 1px 3px 2px rgba(0, 0, 0, 0.12);
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    padding: 22px 20px;
+    width: 100%;
+}
+
+.restaurant-card__header {
+    display: flex;
+    font-size: 25px;
+    gap: 20px;
+}
+
+.restaurant-card__name {
+    flex-basis: auto;
+    flex-grow: 1;
+    font-family: Montserrat, sans-serif;
+    font-size: 20px;
+}
+
+.restaurant-card__arrow {
+    align-self: start;
+    aspect-ratio: 0.56;
+    border-color: rgb(14, 168, 60);
+    border-style: solid;
+    border-width: 2px;
+    margin-top: 3px;
+    object-fit: auto;
+    object-position: center;
+    stroke-width: 2.71px;
+    width: 10px;
+}
+
+.restaurant-card__address,
+.restaurant-card__hours,
+.restaurant-card__days,
+.restaurant-card__phone {
+    display: flex;
+    gap: 18px;
+    margin-top: 6px;
+}
+
+.restaurant-card__address-icon,
+.restaurant-card__hours-icon,
+.restaurant-card__days-icon,
+.restaurant-card__phone-icon {
+    height: 25px;
+    width: 25px;
+}
+
+.restaurant-finder__cta {
+    align-items: center;
+    background-color: #26cf6f;
+    border-radius: 15px;
+    color: #fff;
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    margin-top: 18px;
+    padding: 11px 44px;
+    white-space: nowrap;
+}
+
+.restaurant-finder__cta-icon {
+    align-self: stretch;
+    aspect-ratio: 1;
+    margin: auto 0;
+    object-fit: auto;
+    object-position: center;
+    width: 28px;
+}
+
+.restaurant-finder__cta-button {
+    align-self: stretch;
+    background-color: #1eb961;
+    border-radius: 15px;
+    display: flex;
+    gap: 11px;
+    padding: 7px 17px;
+}
+
+.restaurant-finder__cta-button-icon {
+    aspect-ratio: 1;
+    object-fit: auto;
+    object-position: center;
+    width: 28px;
+}
+
+.restaurant-finder__cta-button-text {
+    font-family: Antic, sans-serif;
+    margin: auto 0;
+}
+
+.restaurant-finder__cta-arrow {
+    align-self: stretch;
+    aspect-ratio: 0.97;
+    margin: auto 0;
+    object-fit: auto;
+    object-position: center;
+    width: 29px;
+}

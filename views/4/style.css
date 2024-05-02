@@ -1,0 +1,283 @@
+.restaurant-container {
+    background-color: #fff;
+    display: flex;
+    max-width: 480px;
+    width: 100%;
+    flex-direction: column;
+    font-weight: 400;
+    margin: 0 auto;
+    padding: 50px 44px 80px;
+}
+
+.restaurant-logo {
+    width: 19px;
+    stroke-width: 4.71px;
+    stroke: #000;
+    border: 5px solid rgba(0, 0, 0, 1);
+    aspect-ratio: 0.6;
+    object-fit: auto;
+    object-position: center;
+}
+
+.restaurant-name {
+    color: #000;
+    letter-spacing: -0.99px;
+    margin-top: 69px;
+    font-family: Ubuntu, sans-serif;
+    font-size: 28px;
+    line-height: 36px;
+}
+
+.restaurant-address {
+    display: flex;
+    margin-top: 24px;
+    gap: 8px;
+    font-size: 20px;
+    color: #000;
+}
+
+.address-icon {
+    width: 28px;
+    aspect-ratio: 1;
+    object-fit: auto;
+    object-position: center;
+    align-self: start;
+}
+
+.address-text {
+    font-family: Montserrat, sans-serif;
+    color: #000;
+    font-size: 18px;
+}
+
+.restaurant-hours {
+    display: flex;
+    margin-top: 7px;
+    gap: 10px;
+    font-size: 20px;
+    color: #000;
+    letter-spacing: -0.6px;
+}
+
+.hours-icon {
+    width: 28px;
+    aspect-ratio: 1;
+    object-fit: auto;
+    object-position: center;
+}
+
+.hours-text {
+    font-family: Montserrat, sans-serif;
+    color: #000;
+    font-size: 18px;
+    margin: auto 0;
+}
+
+.restaurant-days {
+    display: flex;
+    margin-top: 12px;
+    gap: 10px;
+    font-size: 20px;
+    color: #000;
+    letter-spacing: -0.6px;
+}
+
+.days-icon {
+    width: 26px;
+    aspect-ratio: 1.09;
+    object-fit: auto;
+    object-position: center;
+}
+
+.days-text {
+    font-family: Montserrat, sans-serif;
+    color: #000;
+    font-size: 18px;
+    margin: auto 0;
+}
+
+.restaurant-phone {
+    display: flex;
+    margin-top: 8px;
+    gap: 10px;
+    font-size: 20px;
+    color: #000;
+}
+
+.phone-icon {
+    width: 28px;
+    aspect-ratio: 1;
+    object-fit: auto;
+    object-position: center;
+}
+
+.phone-number {
+    font-family: Montserrat, sans-serif;
+    color: #000;
+    font-size: 18px;
+    margin: auto 0;
+}
+
+.menu-items-row-1 {
+    display: flex;
+    margin-top: 64px;
+    gap: 20px;
+}
+
+.menu-item-1 {
+    border-radius: 15px;
+    box-shadow: 0px 1px 3px 2px rgba(0, 0, 0, 0.12);
+    background-color: #fcfcfc;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 0 5px 12px;
+}
+
+.menu-item-image-1 {
+    width: 119px;
+    aspect-ratio: 1.41;
+    object-fit: auto;
+    object-position: center;
+    align-self: center;
+    max-width: 100%;
+}
+
+.menu-item-name-1 {
+    color: #000;
+    margin-top: 17px;
+    font-family: Karla, sans-serif;
+    color: #000;
+    font-size: 18px;
+}
+
+.menu-item-button-1 {
+    border-radius: 10px;
+    background-color: #26cf6f;
+    margin-top: 12px;
+    color: #fff;
+    white-space: nowrap;
+    justify-content: center;
+    padding: 10px 52px;
+    font: 12px Alata, sans-serif;
+}
+
+.menu-item-2 {
+    border-radius: 15px;
+    box-shadow: 0px 1px 3px 2px rgba(0, 0, 0, 0.12);
+    background-color: #fcfcfc;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 13px 5px;
+}
+
+.menu-item-image-2 {
+    width: 119px;
+    aspect-ratio: 1.43;
+    object-fit: auto;
+    object-position: center;
+    align-self: center;
+    max-width: 100%;
+}
+
+.menu-item-name-2 {
+    color: #000;
+    margin-top: 4px;
+    font-family: Karla, sans-serif;
+    color: #000;
+    font-size: 18px;
+}
+
+.menu-item-button-2 {
+    border-radius: 10px;
+    background-color: #26cf6f;
+    margin-top: 12px;
+    color: #fff;
+    white-space: nowrap;
+    justify-content: center;
+    padding: 10px 52px;
+    font: 12px Alata, sans-serif;
+}
+
+.menu-items-row-2 {
+    display: flex;
+    margin-top: 29px;
+    gap: 20px;
+}
+
+.menu-item-3 {
+    border-radius: 15px;
+    box-shadow: 0px 1px 3px 2px rgba(0, 0, 0, 0.12);
+    background-color: #fcfcfc;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 0 5px 12px;
+}
+
+.menu-item-image-3 {
+    width: 119px;
+    aspect-ratio: 1.41;
+    object-fit: auto;
+    object-position: center;
+    align-self: center;
+    max-width: 100%;
+}
+
+.menu-item-name-3 {
+    color: #000;
+    margin-top: 17px;
+    font-family: Karla, sans-serif;
+    color: #000;
+    font-size: 18px;
+}
+
+.menu-item-button-3 {
+    border-radius: 10px;
+    background-color: #26cf6f;
+    margin-top: 12px;
+    color: #fff;
+    white-space: nowrap;
+    justify-content: center;
+    padding: 10px 52px;
+    font: 12px Alata, sans-serif;
+}
+
+.menu-item-4 {
+    border-radius: 15px;
+    box-shadow: 0px 1px 3px 2px rgba(0, 0, 0, 0.12);
+    background-color: #fcfcfc;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 13px 5px;
+}
+
+.menu-item-image-4 {
+    width: 119px;
+    aspect-ratio: 1.43;
+    object-fit: auto;
+    object-position: center;
+    align-self: center;
+    max-width: 100%;
+}
+
+.menu-item-name-4 {
+    color: #000;
+    margin-top: 4px;
+    font-family: Karla, sans-serif;
+    color: #000;
+    font-size: 18px;
+}
+
+.menu-item-button-4 {
+    border-radius: 10px;
+    background-color: #26cf6f;
+    margin-top: 12px;
+    color: #fff;
+    white-space: nowrap;
+    justify-content: center;
+    padding: 10px 52px;
+    font: 12px Alata, sans-serif;
+}

@@ -1,0 +1,274 @@
+<style>
+  .restaurant-finder {
+    background-color: #fff;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    font-size: 13px;
+    font-weight: 400;
+    margin: 0 auto;
+    max-width: 480px;
+    padding: 18px 44px 38px;
+    width: 100%;
+  }
+
+  .restaurant-finder__image {
+    aspect-ratio: 2;
+    max-width: 100%;
+    object-fit: auto;
+    object-position: center;
+    width: 171px;
+  }
+
+  .restaurant-finder__title {
+    font: 26px/36px Alata, sans-serif;
+    letter-spacing: -0.78px;
+    margin-top: 19px;
+  }
+
+  .restaurant-card {
+    background-color: #fcfcfc;
+    border-radius: 15px;
+    box-shadow: 0px 1px 3px 2px rgba(0, 0, 0, 0.12);
+    display: flex;
+    flex-direction: column;
+    margin-top: 33px;
+    padding: 25px 23px;
+    width: 100%;
+  }
+
+  .restaurant-card__header {
+    display: flex;
+    font-size: 25px;
+    gap: 20px;
+  }
+
+  .restaurant-card__name {
+    flex-basis: auto;
+    flex-grow: 1;
+    font-family: Alata, sans-serif;
+  }
+
+  .restaurant-card__arrow {
+    align-self: start;
+    aspect-ratio: 0.56;
+    border-color: rgba(0, 0, 0, 1);
+    border-style: solid;
+    border-width: 3px;
+    margin-top: 4px;
+    object-fit: auto;
+    object-position: center;
+    stroke: #000;
+    stroke-width: 2.71px;
+    width: 10px;
+  }
+
+  .restaurant-card__address {
+    display: flex;
+    gap: 10px;
+    margin-top: 14px;
+  }
+
+  .restaurant-card__address-icon {
+    aspect-ratio: 1.06;
+    object-fit: auto;
+    object-position: center;
+    width: 17px;
+  }
+
+  .restaurant-card__address-text {
+    flex-basis: auto;
+    flex-grow: 1;
+    font-family: Antic, sans-serif;
+  }
+
+  .restaurant-card__hours {
+    display: flex;
+    gap: 10px;
+    letter-spacing: -0.39px;
+    margin-top: 8px;
+  }
+
+  .restaurant-card__hours-icon {
+    aspect-ratio: 1.08;
+    object-fit: auto;
+    object-position: center;
+    width: 15px;
+  }
+
+  .restaurant-card__hours-text {
+    flex-basis: auto;
+    flex-grow: 1;
+    font-family: Antic, sans-serif;
+  }
+
+  .restaurant-card__days {
+    align-self: start;
+    display: flex;
+    gap: 12px;
+    letter-spacing: -0.39px;
+    margin: 10px 0 0 27px;
+  }
+
+  .restaurant-card__days-icon {
+    aspect-ratio: 1.08;
+    object-fit: auto;
+    object-position: center;
+    width: 14px;
+  }
+
+  .restaurant-card__days-text {
+    flex-basis: auto;
+    flex-grow: 1;
+    font-family: Antic, sans-serif;
+  }
+
+  .restaurant-card__phone {
+    display: flex;
+    gap: 9px;
+    margin-top: 9px;
+  }
+
+  .restaurant-card__phone-icon {
+    aspect-ratio: 1.06;
+    object-fit: auto;
+    object-position: center;
+    width: 16px;
+  }
+
+  .restaurant-card__phone-text {
+    flex-basis: auto;
+    flex-grow: 1;
+    font-family: Antic, sans-serif;
+    margin: auto 0;
+  }
+
+  .restaurant-finder__cta {
+    align-items: center;
+    background-color: #26cf6f;
+    border-radius: 15px;
+    color: #fff;
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    margin-top: 18px;
+    padding: 11px 44px;
+    white-space: nowrap;
+  }
+
+  .restaurant-finder__cta-icon {
+    align-self: stretch;
+    aspect-ratio: 1;
+    margin: auto 0;
+    object-fit: auto;
+    object-position: center;
+    width: 28px;
+  }
+
+  .restaurant-finder__cta-button {
+    align-self: stretch;
+    background-color: #1eb961;
+    border-radius: 15px;
+    display: flex;
+    gap: 11px;
+    padding: 7px 17px;
+  }
+
+  .restaurant-finder__cta-button-icon {
+    aspect-ratio: 1;
+    object-fit: auto;
+    object-position: center;
+    width: 28px;
+  }
+
+  .restaurant-finder__cta-button-text {
+    font-family: Antic, sans-serif;
+    margin: auto 0;
+  }
+
+  .restaurant-finder__cta-arrow {
+    align-self: stretch;
+    aspect-ratio: 0.97;
+    margin: auto 0;
+    object-fit: auto;
+    object-position: center;
+    width: 29px;
+  }
+</style>
+
+<main class="restaurant-finder">
+  <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/7b3847e3b6396aa24f0a50dd05249389ec8badaf0b7c500fb564cf4cd4661b8c?apiKey=74c09cb2429b4b1a996fb9eea1af5334&" alt="Restaurant Finder" class="restaurant-finder__image" />
+  <h1 class="restaurant-finder__title">Trouver un restaurant à proximité</h1>
+
+  <article class="restaurant-card">
+    <header class="restaurant-card__header">
+      <h2 class="restaurant-card__name">Restaurant de ville</h2>
+      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/150b0ee3257735e11e6181d5aa8673e7582abdf698719663f67036a84fa8db8b?apiKey=74c09cb2429b4b1a996fb9eea1af5334&" alt="" class="restaurant-card__arrow" />
+    </header>
+    <div class="restaurant-card__address">
+      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/150599b9c99e4177b4821459ebfbb49a7e43dfb2703f852cf1044586f71c91d7?apiKey=74c09cb2429b4b1a996fb9eea1af5334&" alt="" class="restaurant-card__address-icon" />
+      <p class="restaurant-card__address-text">02 rue Jhon Jorès, 93011</p>
+    </div>
+    <div class="restaurant-card__hours">
+      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/f5c2db0efed66b663276751185fa6c32f3acc4d5d693619a5ba90564a620202c?apiKey=74c09cb2429b4b1a996fb9eea1af5334&" alt="" class="restaurant-card__hours-icon" />
+      <p class="restaurant-card__hours-text">10:00h - 21:30h</p>
+    </div>
+    <div class="restaurant-card__days">
+      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/494d355b5051c558308d28920b8ef780c6eb83dc7f15a1c642b492f7396e93a2?apiKey=74c09cb2429b4b1a996fb9eea1af5334&" alt="" class="restaurant-card__days-icon" />
+      <p class="restaurant-card__days-text">Dimanche - Vendredi</p>
+    </div>
+    <div class="restaurant-card__phone">
+      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/7329f3babc2f7efc6d032f2cb33470700cb59e5c2d99c9bb4fabfe774f8af335?apiKey=74c09cb2429b4b1a996fb9eea1af5334&" alt="" class="restaurant-card__phone-icon" />
+      <p class="restaurant-card__phone-text">01 28 93 85 73 91</p>
+    </div>
+  </article>
+
+  <article class="restaurant-card">
+    <header class="restaurant-card__header">
+      <h2 class="restaurant-card__name">Restaurant de ville</h2>
+      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/150b0ee3257735e11e6181d5aa8673e7582abdf698719663f67036a84fa8db8b?apiKey=74c09cb2429b4b1a996fb9eea1af5334&" alt="" class="restaurant-card__arrow" />
+    </header>
+    <div class="restaurant-card__address">
+      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/150599b9c99e4177b4821459ebfbb49a7e43dfb2703f852cf1044586f71c91d7?apiKey=74c09cb2429b4b1a996fb9eea1af5334&" alt="" class="restaurant-card__address-icon" />
+      <p class="restaurant-card__address-text">02 rue Jhon Jorès, 93011</p>
+    </div>
+    <div class="restaurant-card__hours">
+      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/f5c2db0efed66b663276751185fa6c32f3acc4d5d693619a5ba90564a620202c?apiKey=74c09cb2429b4b1a996fb9eea1af5334&" alt="" class="restaurant-card__hours-icon" />
+      <p class="restaurant-card__hours-text">10:00h - 21:30h</p>
+    </div>
+    <p class="restaurant-card__days-text">Dimanche - Vendredi</p>
+    <div class="restaurant-card__phone">
+      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/7329f3babc2f7efc6d032f2cb33470700cb59e5c2d99c9bb4fabfe774f8af335?apiKey=74c09cb2429b4b1a996fb9eea1af5334&" alt="" class="restaurant-card__phone-icon" />
+      <p class="restaurant-card__phone-text">01 28 93 85 73 91</p>
+    </div>
+  </article>
+
+  <article class="restaurant-card">
+    <header class="restaurant-card__header">
+      <h2 class="restaurant-card__name">Restaurant de ville</h2>
+      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/150b0ee3257735e11e6181d5aa8673e7582abdf698719663f67036a84fa8db8b?apiKey=74c09cb2429b4b1a996fb9eea1af5334&" alt="" class="restaurant-card__arrow" />
+    </header>
+    <div class="restaurant-card__address">
+      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/150599b9c99e4177b4821459ebfbb49a7e43dfb2703f852cf1044586f71c91d7?apiKey=74c09cb2429b4b1a996fb9eea1af5334&" alt="" class="restaurant-card__address-icon" />
+      <p class="restaurant-card__address-text">02 rue Jhon Jorès, 93011</p>
+    </div>
+    <div class="restaurant-card__hours">
+      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/f5c2db0efed66b663276751185fa6c32f3acc4d5d693619a5ba90564a620202c?apiKey=74c09cb2429b4b1a996fb9eea1af5334&" alt="" class="restaurant-card__hours-icon" />
+      <p class="restaurant-card__hours-text">10:00h - 21:30h</p>
+    </div>
+    <p class="restaurant-card__days-text">Dimanche - Vendredi</p>
+    <div class="restaurant-card__phone">
+      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/7329f3babc2f7efc6d032f2cb33470700cb59e5c2d99c9bb4fabfe774f8af335?apiKey=74c09cb2429b4b1a996fb9eea1af5334&" alt="" class="restaurant-card__phone-icon" />
+      <p class="restaurant-card__phone-text">01 28 93 85 73 91</p>
+    </div>
+  </article>
+
+  <section class="restaurant-finder__cta">
+    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/dc5c8d09c0260225b4ad092d8005a4cb98073f25de20292ed5cf55222a5b3c97?apiKey=74c09cb2429b4b1a996fb9eea1af5334&" alt="" class="restaurant-finder__cta-icon" />
+    <div class="restaurant-finder__cta-button">
+      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/947682d65d58b0ae001bdd85cbfffab8e1fbf027c1167c38f13dc7b9fde371b7?apiKey=74c09cb2429b4b1a996fb9eea1af5334&" alt="" class="restaurant-finder__cta-button-icon" />
+      <span class="restaurant-finder__cta-button-text">Restaurants</span>
+    </div>
+    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/21b829d62573f2bc6ca9c4605872589574efa298ad29b58d35de05b6e5373601?apiKey=74c09cb2429b4b1a996fb9eea1af5334&" alt="" class="restaurant-finder__cta-arrow" />
+  </section>
+</main>

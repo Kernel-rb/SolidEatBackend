@@ -1,0 +1,228 @@
+<style>
+  .container {
+    background-color: #fff;
+    display: flex;
+    max-width: 480px;
+    width: 100%;
+    flex-direction: column;
+    align-items: start;
+    font-weight: 400;
+    margin: 0 auto;
+    padding: 80px 22px 41px;
+  }
+
+  .dish-image {
+    aspect-ratio: 1.41;
+    object-fit: auto;
+    object-position: center;
+    width: 100%;
+    align-self: stretch;
+    margin-top: 52px;
+  }
+
+  .dish-name {
+    color: #000;
+    letter-spacing: -1.26px;
+    margin: 28px 0 0 20px;
+    font: 42px/138% Alata, sans-serif;
+  }
+
+  .dish-description {
+    color: #6b6b6b;
+    margin: 5px 0 0 20px;
+    font: 14px Antic, sans-serif;
+  }
+
+  .restaurant-info {
+    display: flex;
+    gap: 12px;
+    font-size: 20px;
+    color: #000;
+    margin: 25px 0 0 22px;
+  }
+
+  .restaurant-icon {
+    aspect-ratio: 1;
+    object-fit: auto;
+    object-position: center;
+    width: 28px;
+  }
+
+  .restaurant-name {
+    font-family: Antic, sans-serif;
+    flex-grow: 1;
+    flex-basis: auto;
+    margin: auto 0;
+  }
+
+  .restaurant-address {
+    display: flex;
+    gap: 8px;
+    font-size: 20px;
+    color: #000;
+    margin: 8px 0 0 20px;
+  }
+
+  .address-icon {
+    aspect-ratio: 1;
+    object-fit: auto;
+    object-position: center;
+    width: 28px;
+    align-self: start;
+  }
+
+  .address-text {
+    font-family: Antic, sans-serif;
+    flex-grow: 1;
+    flex-basis: auto;
+  }
+
+  .restaurant-hours {
+    display: flex;
+    gap: 10px;
+    font-size: 20px;
+    color: #000;
+    letter-spacing: -0.6px;
+    margin: 7px 0 0 20px;
+  }
+
+  .hours-icon {
+    aspect-ratio: 1;
+    object-fit: auto;
+    object-position: center;
+    width: 28px;
+  }
+
+  .hours-text {
+    font-family: Antic, sans-serif;
+    flex-grow: 1;
+    flex-basis: auto;
+    margin: auto 0;
+  }
+
+  .restaurant-days {
+    display: flex;
+    gap: 14px;
+    font-size: 20px;
+    color: #000;
+    letter-spacing: -0.6px;
+    margin: 11px 0 0 22px;
+  }
+
+  .days-icon {
+    aspect-ratio: 1.09;
+    object-fit: auto;
+    object-position: center;
+    width: 26px;
+  }
+
+  .days-text {
+    font-family: Antic, sans-serif;
+    flex-grow: 1;
+    flex-basis: auto;
+    margin: auto 0;
+  }
+
+  .restaurant-phone {
+    display: flex;
+    gap: 14px;
+    font-size: 20px;
+    color: #000;
+    margin: 9px 0 0 20px;
+  }
+
+  .phone-icon {
+    aspect-ratio: 1;
+    object-fit: auto;
+    object-position: center;
+    width: 28px;
+  }
+
+  .phone-number {
+    font-family: Antic, sans-serif;
+    flex-grow: 1;
+    flex-basis: auto;
+    margin: auto 0;
+  }
+
+  .price-offer-container {
+    align-self: center;
+    display: flex;
+    margin-top: 45px;
+    width: 100%;
+    max-width: 325px;
+    gap: 20px;
+    white-space: nowrap;
+    justify-content: space-between;
+  }
+
+  .price-container {
+    align-self: start;
+    display: flex;
+    flex-direction: column;
+    color: #000;
+  }
+
+  .price-label {
+    letter-spacing: 1.6px;
+    font: 20px Antic, sans-serif;
+  }
+
+  .price-value {
+    letter-spacing: 1.5px;
+    margin-top: 9px;
+    font: 30px/138% Alata, sans-serif;
+  }
+
+  .offer-button {
+    border-radius: 10px;
+    background-color: #26cf6f;
+    align-items: center;
+    color: #fff;
+    justify-content: center;
+    padding: 18px 60px;
+    font: 24px Alata, sans-serif;
+    cursor: pointer;
+  }
+</style>
+
+<main class="container">
+  <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/b1eab2e5161c39e9b979d337d37fab1218dae055455c1460587ce1b303a06763?apiKey=74c09cb2429b4b1a996fb9eea1af5334&" alt="Salade au poulet" class="dish-image" />
+  <h1 class="dish-name">Salade au poulet</h1>
+  <p class="dish-description">
+    La salade au poulet se compose de filets de poulet grillés, de laitue ou de roquette, de tomates cerises, de concombres, de poivrons, et peut être agrémentée d'avocats, de carottes râpées, d'épices pour le poulet, d'huile d'olive, de vinaigre balsamique ou de jus de citron, d'herbes fraîches, de fromage et de graines selon les préférences.
+  </p>
+  
+  <section class="restaurant-info">
+    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/4bffbb91c5d41433810a4b98b3850fc5de6ae842d76bd9fb31ea95da6117a175?apiKey=74c09cb2429b4b1a996fb9eea1af5334&" alt="" class="restaurant-icon" />
+    <span class="restaurant-name">Restaurant de la ville</span>
+  </section>
+
+  <address class="restaurant-address">
+    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/7ad760b8f7c355d40374a956ea177215de453f4bed914a7c1f6e92d22033416d?apiKey=74c09cb2429b4b1a996fb9eea1af5334&" alt="" class="address-icon" />
+    <span class="address-text">02 rue Jhon Jorès, 93011</span>
+  </address>
+
+  <section class="restaurant-hours">
+    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/109d2be00465eba29f4dce3b8d801f45bec11667468c4cba56bd6d82ccbf2631?apiKey=74c09cb2429b4b1a996fb9eea1af5334&" alt="" class="hours-icon" />
+    <time class="hours-text">10:00h - 21:30h</time>
+  </section>
+
+  <section class="restaurant-days">
+    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/8cc69bbe489aa6fe288dc05018e7c80fd2245b524c6412796d3456c238481906?apiKey=74c09cb2429b4b1a996fb9eea1af5334&" alt="" class="days-icon" />
+    <span class="days-text">Dimanche - Vendredi</span>
+  </section>
+
+  <section class="restaurant-phone">
+    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/7f7d39ede355086a02fd8dffc5aa59188cf6134b51a209131925796304f8c277?apiKey=74c09cb2429b4b1a996fb9eea1af5334&" alt="" class="phone-icon" />
+    <a href="tel:0128938573" class="phone-number">01 28 93 85 73 91</a>
+  </section>
+
+  <section class="price-offer-container">
+    <div class="price-container">
+      <span class="price-label">Prix</span>
+      <span class="price-value">7.00€</span>
+    </div>
+    <button class="offer-button">Offrir</button>
+  </section>
+</main>

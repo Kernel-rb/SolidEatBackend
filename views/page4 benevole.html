@@ -1,0 +1,342 @@
+<style>
+  .restaurant-container {
+    background-color: #fff;
+    display: flex;
+    max-width: 480px;
+    width: 100%;
+    flex-direction: column;
+    color: #000;
+    font-weight: 400;
+    margin: 0 auto;
+    padding: 50px 44px 80px;
+  }
+
+  .restaurant-icon {
+    width: 19px;
+    stroke-width: 4.71px;
+    stroke: #000;
+    border: 5px solid rgba(0, 0, 0, 1);
+    aspect-ratio: 0.6;
+    object-fit: auto;
+    object-position: center;
+  }
+
+  .restaurant-name {
+    letter-spacing: -0.99px;
+    margin-top: 69px;
+    font: 33px/138% Alata, sans-serif;
+  }
+
+  .restaurant-address {
+    display: flex;
+    margin-top: 24px;
+    gap: 8px;
+    font-size: 20px;
+  }
+
+  .address-icon {
+    width: 28px;
+    align-self: start;
+    aspect-ratio: 1;
+    object-fit: auto;
+    object-position: center;
+  }
+
+  .address-text {
+    font-family: Antic, sans-serif;
+    flex-grow: 1;
+    flex-basis: auto;
+  }
+
+  .restaurant-hours {
+    display: flex;
+    margin-top: 7px;
+    gap: 10px;
+    font-size: 20px;
+    letter-spacing: -0.6px;
+  }
+
+  .hours-icon {
+    width: 28px;
+    aspect-ratio: 1;
+    object-fit: auto;
+    object-position: center;
+  }
+
+  .hours-text {
+    font-family: Antic, sans-serif;
+    flex-grow: 1;
+    flex-basis: auto;
+    margin: auto 0;
+  }
+
+  .restaurant-days {
+    display: flex;
+    margin-top: 12px;
+    gap: 10px;
+    font-size: 20px;
+    letter-spacing: -0.6px;
+  }
+
+  .days-icon {
+    width: 26px;
+    aspect-ratio: 1.09;
+    object-fit: auto;
+    object-position: center;
+  }
+
+  .days-text {
+    font-family: Antic, sans-serif;
+    flex-grow: 1;
+    flex-basis: auto;
+    margin: auto 0;
+  }
+
+  .restaurant-phone {
+    display: flex;
+    margin-top: 8px;
+    gap: 10px;
+    font-size: 20px;
+  }
+
+  .phone-icon {
+    width: 28px;
+    aspect-ratio: 1;
+    object-fit: auto;
+    object-position: center;
+  }
+
+  .phone-number {
+    font-family: Antic, sans-serif;
+    flex-grow: 1;
+    flex-basis: auto;
+    margin: auto 0;
+  }
+
+  .menu-items-row-1 {
+    display: flex;
+    margin-top: 64px;
+    gap: 20px;
+  }
+
+  .menu-item-1 {
+    border-radius: 15px;
+    box-shadow: 0px 1px 3px 2px rgba(0, 0, 0, 0.12);
+    background-color: #fcfcfc;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 0 5px 14px;
+  }
+
+  .menu-item-image-1 {
+    width: 119px;
+    align-self: center;
+    max-width: 100%;
+    aspect-ratio: 1.41;
+    object-fit: auto;
+    object-position: center;
+  }
+
+  .menu-item-name-1 {
+    margin: 17px 14px 0 0;
+    font: 17px Alata, sans-serif;
+  }
+
+  .menu-item-price-1 {
+    margin-top: 4px;
+    font: 16px Antic, sans-serif;
+  }
+
+  .menu-item-offer-1 {
+    border-radius: 10px;
+    background-color: #26cf6f;
+    margin-top: 15px;
+    color: #fff;
+    white-space: nowrap;
+    justify-content: center;
+    padding: 10px 60px;
+    font: 12px Alata, sans-serif;
+    cursor: pointer;
+  }
+
+  .menu-item-2 {
+    border-radius: 15px;
+    box-shadow: 0px 1px 3px 2px rgba(0, 0, 0, 0.12);
+    background-color: #fcfcfc;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 14px 5px;
+  }
+
+  .menu-item-image-2 {
+    width: 119px;
+    align-self: center;
+    max-width: 100%;
+    aspect-ratio: 1.43;
+    object-fit: auto;
+    object-position: center;
+  }
+
+  .menu-item-name-2 {
+    margin-top: 4px;
+    font: 17px Alata, sans-serif;
+  }
+
+  .menu-item-price-2 {
+    margin-top: 4px;
+    font: 16px Antic, sans-serif;
+  }
+
+  .menu-item-offer-2 {
+    border-radius: 10px;
+    background-color: #26cf6f;
+    margin-top: 15px;
+    align-items: start;
+    color: #fff;
+    white-space: nowrap;
+    justify-content: center;
+    padding: 10px 58px;
+    font: 12px Alata, sans-serif;
+    cursor: pointer;
+  }
+
+  .menu-items-row-2 {
+    display: flex;
+    margin-top: 29px;
+    gap: 20px;
+  }
+
+  .menu-item-3 {
+    border-radius: 15px;
+    box-shadow: 0px 1px 3px 2px rgba(0, 0, 0, 0.12);
+    background-color: #fcfcfc;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 0 5px 14px;
+  }
+
+  .menu-item-image-3 {
+    width: 119px;
+    align-self: center;
+    max-width: 100%;
+    aspect-ratio: 1.41;
+    object-fit: auto;
+    object-position: center;
+  }
+
+  .menu-item-name-3 {
+    margin: 17px 14px 0 0;
+    font: 17px Alata, sans-serif;
+  }
+
+  .menu-item-price-3 {
+    margin-top: 4px;
+    font: 16px Antic, sans-serif;
+  }
+
+  .menu-item-offer-3 {
+    border-radius: 10px;
+    background-color: #26cf6f;
+    margin-top: 15px;
+    color: #fff;
+    white-space: nowrap;
+    justify-content: center;
+    padding: 10px 60px;
+    font: 12px Alata, sans-serif;
+    cursor: pointer;
+  }
+
+  .menu-item-4 {
+    border-radius: 15px;
+    box-shadow: 0px 1px 3px 2px rgba(0, 0, 0, 0.12);
+    background-color: #fcfcfc;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 14px 5px;
+  }
+
+  .menu-item-image-4 {
+    width: 119px;
+    align-self: center;
+    max-width: 100%;
+    aspect-ratio: 1.43;
+    object-fit: auto;
+    object-position: center;
+  }
+
+  .menu-item-name-4 {
+    margin-top: 4px;
+    font: 17px Alata, sans-serif;
+  }
+
+  .menu-item-price-4 {
+    margin-top: 4px;
+    font: 16px Antic, sans-serif;
+  }
+
+  .menu-item-offer-4 {
+    border-radius: 10px;
+    background-color: #26cf6f;
+    margin-top: 15px;
+    align-items: start;
+    color: #fff;
+    white-space: nowrap;
+    justify-content: center;
+    padding: 10px 58px;
+    font: 12px Alata, sans-serif;
+    cursor: pointer;
+  }
+</style>
+
+<div class="restaurant-container">
+  <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/fc3fa3e74189131955d22b255e78544fe4adbb4284748d6e19bfcb38ab905b71?apiKey=74c09cb2429b4b1a996fb9eea1af5334&" alt="Restaurant icon" class="restaurant-icon" />
+  <h1 class="restaurant-name">Restaurant de la ville</h1>
+  <div class="restaurant-address">
+    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/7ad760b8f7c355d40374a956ea177215de453f4bed914a7c1f6e92d22033416d?apiKey=74c09cb2429b4b1a996fb9eea1af5334&" alt="Address icon" class="address-icon" />
+    <address class="address-text">02 rue Jhon Jorès, 93011</address>
+  </div>
+  <div class="restaurant-hours">
+    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/109d2be00465eba29f4dce3b8d801f45bec11667468c4cba56bd6d82ccbf2631?apiKey=74c09cb2429b4b1a996fb9eea1af5334&" alt="Hours icon" class="hours-icon" />
+    <time class="hours-text">10:00h - 21:30h</time>
+  </div>
+  <div class="restaurant-days">
+    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/8cc69bbe489aa6fe288dc05018e7c80fd2245b524c6412796d3456c238481906?apiKey=74c09cb2429b4b1a996fb9eea1af5334&" alt="Days icon" class="days-icon" />
+    <p class="days-text">Dimanche - Vendredi</p>
+  </div>
+  <div class="restaurant-phone">
+    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/7f7d39ede355086a02fd8dffc5aa59188cf6134b51a209131925796304f8c277?apiKey=74c09cb2429b4b1a996fb9eea1af5334&" alt="Phone icon" class="phone-icon" />
+    <a href="tel:0128938573" class="phone-number">01 28 93 85 73 91</a>
+  </div>
+  <div class="menu-items-row-1">
+    <article class="menu-item-1">
+      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/e8938bd7c9730e52474abe700c0ac90ea245623f5d802301386387617706ac45?apiKey=74c09cb2429b4b1a996fb9eea1af5334&" alt="Salade au poulet" class="menu-item-image-1" />
+      <h2 class="menu-item-name-1">Salade au poulet</h2>
+      <p class="menu-item-price-1">7.00 €</p>
+      <button class="menu-item-offer-1">Offrir</button>
+    </article>
+    <article class="menu-item-2">
+      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/72231d1526b95e464e3b4f39d76d18a663d56c4b35c209559760621aa582929b?apiKey=74c09cb2429b4b1a996fb9eea1af5334&" alt="Soupe aux légumes" class="menu-item-image-2" />
+      <h2 class="menu-item-name-2">Soupe aux légu...</h2>
+      <p class="menu-item-price-2">8.50 €</p>
+      <button class="menu-item-offer-2">Offrir</button>
+    </article>
+  </div>
+  <div class="menu-items-row-2">
+    <article class="menu-item-3">
+      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/e8938bd7c9730e52474abe700c0ac90ea245623f5d802301386387617706ac45?apiKey=74c09cb2429b4b1a996fb9eea1af5334&" alt="Salade au poulet" class="menu-item-image-3" />
+      <h2 class="menu-item-name-3">Salade au poulet</h2>
+      <p class="menu-item-price-3">7.00 €</p>
+      <button class="menu-item-offer-3">Offrir</button>
+    </article>
+    <article class="menu-item-4">
+      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/72231d1526b95e464e3b4f39d76d18a663d56c4b35c209559760621aa582929b?apiKey=74c09cb2429b4b1a996fb9eea1af5334&" alt="Soupe aux légumes" class="menu-item-image-4" />
+      <h2 class="menu-item-name-4">Soupe aux légu...</h2>
+      <p class="menu-item-price-4">8.50 €</p>
+      <button class="menu-item-offer-4">Offrir</button>
+    </article>
+  </div>
+</div>

@@ -1,0 +1,121 @@
+.profile-container {
+    background-color: #fff;
+    display: flex;
+    max-width: 480px;
+    width: 100%;
+    flex-direction: column;
+    align-items: start;
+    font-size: 21px;
+    color: #000;
+    font-weight: 400;
+    margin: 0 auto; /* Réglage pour centrer le conteneur */
+    padding: 18px 24px 46px;
+}
+
+.profile-image {
+    aspect-ratio: 2;
+    object-fit: auto;
+    object-position: center;
+    width: 171px;
+    max-width: 100%;
+}
+
+.info-label {
+    font-family: Ubuntu, sans-serif;
+    margin: 65px 0 0 12px;
+}
+
+.info-value {
+  color: #000; /* Couleur du texte */
+  margin: 13px 0 0 12px;
+  font-size: 18px; /* Taille de la police */
+  font-family: 'Montserrat', sans-serif; /* Police de caractères */
+  border: 2px solid #ccc; /* Bordure */
+  border-radius: 8px; /* Rayon de bordure */
+  padding: 10px; /* Espacement intérieur */
+  width: calc(100% - 24px); /* Largeur calculée pour tenir compte des marges */
+  box-sizing: border-box; /* Pour inclure la bordure dans la largeur */
+  transition: border-color 0.3s ease; /* Transition de la couleur de la bordure */
+  margin: 8px 0;
+}
+
+.info-value:focus {
+  border-color: #26cf6f; /* Couleur de la bordure au focus */
+}
+
+.edit-info-button{
+    border-radius: 15px;
+    background-color: #26cf6f;
+    color: #fff;
+    justify-content: center;
+    margin: 56px 0 0 49px;
+    padding: 18px 41px;
+    font: 20px Ubuntu, sans-serif;
+    margin: 32px 0 0 0;
+}
+
+.logout-button {
+  border-radius: 15px;
+    background-color: #ffffff;
+    color: #f83a3a;
+    justify-content: center;
+    margin: 56px 0 0 49px;
+    padding: 18px 41px;
+    font: 20px Ubuntu, sans-serif;
+    margin: 12px 0 0 0;
+}
+
+
+.delete-account-link {
+    color: #f57a7a;
+    text-decoration: underline;
+    align-self: center;
+    margin-top: 35px;
+    font: 20px Antic, sans-serif;
+    margin-top: 20px;
+}
+
+.bottom-nav {
+    border-radius: 15px;
+    background-color: #26cf6f;
+    align-self: stretch;
+    display: flex;
+    margin-top: 93px;
+    align-items: center;
+    gap: 20px;
+    font-size: 13px;
+    color: #fff;
+    justify-content: space-between;
+    padding: 11px 35px;
+    margin-top: 48px;
+}
+
+.nav-icon {
+    aspect-ratio: 1;
+    object-fit: auto;
+    object-position: center;
+    width: 28px;
+    align-self: stretch;
+    margin: auto 0;
+}
+
+.active-nav-item {
+    border-radius: 15px;
+    background-color: #1eb961;
+    align-self: stretch;
+    display: flex;
+    gap: 4px;
+    padding: 6px 10px;
+}
+
+.active-nav-icon {
+    aspect-ratio: 0.97;
+    object-fit: auto;
+    object-position: center;
+    width: 29px;
+}
+
+.active-nav-text {
+    font-family: Antic, sans-serif;
+    margin: auto 0;
+}

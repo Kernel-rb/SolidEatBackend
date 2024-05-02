@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <style>
+        .profile-container {
+          background-color: #fff;
+          display: flex;
+          max-width: 480px;
+          width: 100%;
+          flex-direction: column;
+          align-items: start;
+          font-size: 21px;
+          color: #000;
+          font-weight: 400;
+          margin: 0 auto;
+          padding: 18px 44px 80px;
+        }
+      
+        .profile-image {
+          aspect-ratio: 2;
+          object-fit: auto;
+          object-position: center;
+          width: 171px;
+          max-width: 100%;
+        }
+      
+        .info-label {
+          font-family: Alata, sans-serif;
+          margin: 60px 0 0 12px;
+        }
+      
+        .info-value {
+          color: #797979;
+          margin: 12px 0 0 12px;
+          font: 22px Antic, sans-serif;
+        }
+      
+        .edit-info-button {
+          border-radius: 15px;
+          background-color: #26cf6f;
+          color: #fff;
+          justify-content: center;
+          margin: 57px 0 0 41px;
+          padding: 18px 41px;
+          font: 20px Alata, sans-serif;
+        }
+      
+        .logout-button {
+          border-radius: 15px;
+          border: 1px solid #f57a7a;
+          align-self: center;
+          align-items: center;
+          color: #f57a7a;
+          justify-content: center;
+          margin: 17px 0 0 14px;
+          padding: 17px 60px;
+          font: 20px Alata, sans-serif;
+        }
+      
+        .delete-account-link {
+          color: #f57a7a;
+          text-decoration: underline;
+          align-self: center;
+          margin-top: 25px;
+          font: 20px Antic, sans-serif;
+        }
+      
+        .navigation-bar {
+          border-radius: 15px;
+          background-color: #26cf6f;
+          display: flex;
+          align-items: center;
+          gap: 20px;
+          font-size: 13px;
+          color: #fff;
+          justify-content: space-between;
+          margin: 65px 0 0 61px;
+          padding: 11px 20px 11px 41px;
+        }
+      
+        .nav-icon {
+          aspect-ratio: 1;
+          object-fit: auto;
+          object-position: center;
+          width: 28px;
+          align-self: stretch;
+          margin: auto 0;
+        }
+      
+        .active-nav-item {
+          border-radius: 15px;
+          background-color: #1eb961;
+          align-self: stretch;
+          display: flex;
+          gap: 4px;
+          padding: 6px 10px;
+        }
+      
+        .active-nav-icon {
+          aspect-ratio: 0.97;
+          object-fit: auto;
+          object-position: center;
+          width: 29px;
+        }
+      
+        .active-nav-text {
+          font-family: Antic, sans-serif;
+          margin: auto 0;
+        }
+      </style>
+      
+      <main class="profile-container">
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/b288b517875e1d009613b573e091e1253ce224d0f03e1fb72454171a53d25ff7?apiKey=adfb88761994448fbf7bc23cda8c817b&" alt="Profile picture" class="profile-image" />
+        
+        <h2 class="info-label">Nom complet</h2>
+        <p class="info-value">Saif Matab</p>
+        
+        <h2 class="info-label">Adresse mail</h2>
+        <p class="info-value">saif.matab@gmail.com</p>
+        
+        <h2 class="info-label">Numero de téléphone</h2>
+        <p class="info-value">(+33) 7 21 44 28 10</p>
+        
+        <h2 class="info-label">Status</h2>
+        <p class="info-value">Meskin</p>
+        
+        <button class="edit-info-button">Modifier mes informations</button>
+        <button class="logout-button">Se déconnecter</button>
+        <a href="#" class="delete-account-link">Supprimer mon compte</a>
+        
+        <nav class="navigation-bar">
+          <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/7ce97197d90748ca58724f2fea920806027c6239988cdad58c0886d488ece6f5?apiKey=adfb88761994448fbf7bc23cda8c817b&" alt="" class="nav-icon" />
+          <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/0bc0021eab93b7b06972ea38084bc5bf8f06ac9ee622955cabf5b550e0de5c8c?apiKey=adfb88761994448fbf7bc23cda8c817b&" alt="" class="nav-icon" />
+          <div class="active-nav-item">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/955f48a4d8defa84694d4f308cedb85b303e8aaced46e7b704321beb43df0f58?apiKey=adfb88761994448fbf7bc23cda8c817b&" alt="" class="active-nav-icon" />
+            <!-- <span class="active-nav-text">Mon compte</span> -->
+          </div>
+        </nav>
+      </main>
+
+
+</body>
+</html>
